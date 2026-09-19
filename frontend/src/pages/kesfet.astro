@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProducerCard from '../components/ProducerCard.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { PRODUCERS, PRODUCTS } from '../lib/data';
+---
+
+<BaseLayout title="Tüm Butik Üreticiler ve Tasarımlar">
+    <div class="container" style="padding: 3rem 1.5rem;">
+        <div style="margin-bottom: 2.5rem;">
+            <h1 style="font-size: 2.4rem; margin-bottom: 0.5rem;">Tüm Butik Üreticileri Keşfedin</h1>
+            <p style="color: #64748b; font-size: 1.05rem;">Türkiye'nin dört bir yanından yetenekli el emeği atölyeleri ve kişiye özel ürünleri.</p>
+        </div>
+
+        <h2 style="font-size: 1.6rem; margin-bottom: 1.5rem;">Onaylı Butik Atölyeler ({PRODUCERS.length})</h2>
+        <div class="grid-3" style="margin-bottom: 4rem;">
+            {PRODUCERS.map(producer => (
+                <ProducerCard producer={producer} />
+            ))}
+        </div>
+
+        <h2 style="font-size: 1.6rem; margin-bottom: 1.5rem;">Koleksiyon Ürünleri ({PRODUCTS.length})</h2>
+        <div class="grid-4">
+            {PRODUCTS.map(product => (
+                <ProductCard product={product} />
+            ))}
+        </div>
+    </div>
+</BaseLayout>

@@ -1,0 +1,63 @@
+---
+import { CATEGORIES } from '../lib/data';
+---
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="logo-wrap" style="color: #fff; margin-bottom: 1rem;">
+                    <div class="logo-icon">🛍️</div>
+                    <span>ButikÇarşı</span>
+                </div>
+                <p style="font-size: 0.9rem; color: #94a3b8; max-width: 320px; margin-bottom: 1.5rem;">
+                    Instagram'da el emeği ile üretim yapan yetenekli butik üreticileri ve tasarım atölyelerini güvenli alışveriş altyapısıyla buluşturan pazar yeri.
+                </p>
+                <div style="display: flex; gap: 0.75rem;">
+                    <a href="https://instagram.com" target="_blank" class="btn btn-sm btn-instagram">Instagram'da Keşfet</a>
+                    <a href="/uretici-ol" class="btn btn-sm btn-primary">Atölyeni Aç</a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="footer-title">Kategoriler</h4>
+                <ul class="footer-links">
+                    {CATEGORIES.map(c => (
+                        <li><a href={`/kategori/${c.slug}`}>{c.name}</a></li>
+                    ))}
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-title">Kurumsal</h4>
+                <ul class="footer-links">
+                    <li><a href="/hakkimizda">Hakkımızda</a></li>
+                    <li><a href="/kesfet">Tüm Üreticiler</a></li>
+                    <li><a href="/uretici-ol">Üretici Başvuru (%10 Komisyon)</a></li>
+                    <li><a href="/iletisim">İletişim & Destek</a></li>
+                    <li><a href="/panel/admin/login.php" target="_blank">Platform Admin</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-title">Güvenli Alışveriş</h4>
+                <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 1rem;">
+                    Ödemeniz iyzico altyapısıyla korunur. Ürününüz size ulaşıp onaylayana kadar ödeme üreticiye aktarılmaz (Escrow Koruma Sistemi).
+                </p>
+                <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; font-size: 0.8rem; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">
+                    🔒 <strong>256-Bit SSL & iyzico Güvencesi</strong><br>
+                    Tüm siparişler 3D Secure ile korunmaktadır.
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>© 2026 ButikÇarşı. Tüm hakları saklıdır.</div>
+            <div style="display: flex; gap: 1.5rem;">
+                <a href="#">Gizlilik Politikası</a>
+                <a href="#">Kullanım Koşulları</a>
+                <a href="#">Mesafeli Satış Sözleşmesi</a>
+            </div>
+        </div>
+    </div>
+</footer>

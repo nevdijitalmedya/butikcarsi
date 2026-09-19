@@ -1,0 +1,47 @@
+---
+import { CATEGORIES } from '../lib/data';
+---
+
+<header class="site-header">
+    <div class="header-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span>✨ %100 Güvenli Alışveriş • Escrow (Emanet) Korumalı Ödeme • Kişiye Özel Üretim</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header-main">
+            <a href="/" class="logo-wrap">
+                <div class="logo-icon">🛍️</div>
+                <span>ButikÇarşı</span>
+            </a>
+
+            <div class="search-bar">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Lazer kolye, epoksi saat, hasır çanta ara..." id="site-search-input">
+            </div>
+
+            <div class="header-actions">
+                <a href="/uretici-ol" class="btn btn-sm btn-secondary d-none-mobile">
+                    <span>✨ Üretici Ol</span>
+                </a>
+                <a href="/panel/producer/login.php" class="btn btn-sm btn-secondary" target="_blank" rel="noopener">
+                    <span>Atölye Girişi</span>
+                </a>
+                <a href="/sepet" class="btn btn-primary btn-sm" style="position: relative;">
+                    <span>Sepet</span>
+                    <span id="header-cart-count" style="display: none; position: absolute; top: -6px; right: -6px; background: #0f172a; color: #fff; border-radius: 999px; width: 20px; height: 20px; font-size: 0.7rem; align-items: center; justify-content: center; font-weight: bold;">0</span>
+                </a>
+            </div>
+        </div>
+
+        <nav class="nav-pills">
+            <a href="/kesfet" class="nav-pill">🌟 Tüm Butikler</a>
+            {CATEGORIES.map(cat => (
+                <a href={`/kategori/${cat.slug}`} class="nav-pill">
+                    {cat.icon} {cat.name}
+                </a>
+            ))}
+        </nav>
+    </div>
+</header>

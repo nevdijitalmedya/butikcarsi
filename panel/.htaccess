@@ -1,0 +1,8 @@
+﻿<IfModule mod_rewrite.c>
+    RewriteEngine On
+    <FilesMatch "^\.env|config\.php|composer\.(json|lock)$">
+        Require all denied
+    </FilesMatch>
+    RewriteRule ^core/ - [F,L]
+</IfModule>
+Options -Indexes

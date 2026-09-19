@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import ProducerCard from '../components/ProducerCard.astro';
+import { CATEGORIES, PRODUCERS, PRODUCTS, BANNERS } from '../lib/data';
+
+const featuredProducts = PRODUCTS.filter(p => p.is_featured);
+const featuredProducers = PRODUCERS.filter(p => p.is_featured);
+const mainBanner = BANNERS[0];
+---
+
+<BaseLayout title="Instagram Butik Üreticileri & Kişiye Özel Tasarımlar Pazaryeri">
+    <!-- HERO SECTION -->
+    <section style="background: linear-gradient(135deg, #fef8f5 0%, #faede5 100%); padding: 3.5rem 0 4.5rem; border-bottom: 1px solid var(--color-border);">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center;">
+                <div>
+                    <span class="badge badge-custom" style="margin-bottom: 1rem; font-size: 0.85rem; padding: 0.4rem 0.8rem;">
+                        ✨ Türkiye'nin İlk Instagram Butik Üretici Pazarı
+                    </span>
+                    <h1 style="font-size: 2.8rem; margin-bottom: 1.2rem; line-height: 1.15; font-weight: 800;">
+                        Instagram'ın En Sevilen <span style="color: var(--color-primary); background: linear-gradient(120deg, rgba(224,99,59,0.15) 0%, rgba(224,99,59,0.05) 100%); padding: 0 6px; border-radius: 4px;">Butik Atölyeleri</span> Tek Çatıda!
+                    </h1>
+                    <p style="font-size: 1.15rem; color: var(--color-dark-muted); margin-bottom: 2rem; line-height: 1.6;">
+                        Lazer kazıma takılardan epoksi tablolara, el örgüsü çantalardan el dikişi deri cüzdanlara... Butik üreticilerden doğrudan ve <strong>%100 güvenli emanet (escrow) ödeme</strong> ile sipariş verin.
+                    </p>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="/kesfet" class="btn btn-primary" style="font-size: 1.05rem; padding: 0.85rem 1.8rem;">
+                            ✨ Butikleri Keşfet
+                        </a>
+                        <a href="/uretici-ol" class="btn btn-secondary" style="font-size: 1.05rem; padding: 0.85rem 1.8rem;">
+                            🛍️ Atölyenle Satışa Başla (%10 Komisyon)
+                        </a>
+                    </div>
+
+                    <div style="display: flex; gap: 2.5rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.08);">
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark);">150+</div>
+                            <div style="font-size: 0.85rem; color: #64748b;">Butik Atölye</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark);">%100</div>
+                            <div style="font-size: 0.85rem; color: #64748b;">El Emeği & Özgün</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark);">7 Gün</div>
+                            <div style="font-size: 0.85rem; color: #64748b;">Teslimat Garantisi</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="position: relative;">
+                    <div style="position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.12); border: 4px solid #fff;">
+                        <img 
+                            src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=900&auto=format&fit=crop&q=80" 
+                            alt="El emeği atölye üretimi" 
+                            style="width: 100%; height: 440px; object-fit: cover;"
+                        />
+                        <div style="position: absolute; bottom: 15px; left: 15px; right: 15px; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); padding: 1rem 1.2rem; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <span class="badge badge-custom">Haftanın Öne Çıkan Butiği</span>
+                                <div style="font-weight: 700; font-size: 1.1rem; margin-top: 2px;">Lazerci Hediyelik</div>
+                                <span style="font-size: 0.8rem; color: #64748b;">@lazerci_hediyelik • Kadıköy, İstanbul</span>
+                            </div>
+                            <a href="/uretici/lazerci-hediyelik" class="btn btn-sm btn-primary">Atölyeyi Gez</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KATEGORİLER -->
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+                <div>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 1px;">KATEGORİLER</span>
+                    <h2 style="font-size: 2rem; margin-top: 0.2rem;">Ne Aramıştınız?</h2>
+                </div>
+                <a href="/kesfet" style="font-weight: 600; color: var(--color-primary);">Tümünü İncele →</a>
+            </div>
+
+            <div class="grid-3">
+                {CATEGORIES.map(cat => (
+                    <a href={`/kategori/${cat.slug}`} class="card" style="display: flex; align-items: center; gap: 1rem; padding: 1.2rem;">
+                        <img 
+                            src={cat.image_url} 
+                            alt={cat.name} 
+                            style="width: 70px; height: 70px; border-radius: var(--radius-sm); object-fit: cover;"
+                        />
+                        <div>
+                            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.2rem;">{cat.name}</h3>
+                            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.3;">{cat.description}</p>
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- ÖNE ÇIKAN BUTİKLER -->
+    <section style="padding: 4rem 0; background: #fff; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+        <div class="container">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto 3rem;">
+                <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 1px;">INSTAGRAM BUTİKLERİ</span>
+                <h2 style="font-size: 2.2rem; margin: 0.4rem 0 0.8rem;">Instagram'ın Sevilen Atölyeleri</h2>
+                <p style="color: var(--color-dark-muted); font-size: 1rem;">
+                    Her biri kendi alanında uzman, binlerce memnun takipçiye sahip butik üreticilerimizle tanışın.
+                </p>
+            </div>
+
+            <div class="grid-3">
+                {featuredProducers.map(producer => (
+                    <ProducerCard producer={producer} />
+                ))}
+            </div>
+
+            <div style="text-align: center; margin-top: 2.5rem;">
+                <a href="/kesfet" class="btn btn-secondary">
+                    Tüm Butik Üreticileri Gör ({PRODUCERS.length} Atölye) →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÖNE ÇIKAN ÜRÜNLER -->
+    <section style="padding: 4.5rem 0;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+                <div>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 1px;">EL EMEĞİ KOLEKSİYON</span>
+                    <h2 style="font-size: 2rem; margin-top: 0.2rem;">Kişiye Özel & Popüler Tasarımlar</h2>
+                </div>
+                <a href="/kesfet" style="font-weight: 600; color: var(--color-primary);">Tüm Ürünler →</a>
+            </div>
+
+            <div class="grid-4">
+                {featuredProducts.map(product => (
+                    <ProductCard product={product} />
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- NASIL ÇALIŞIR & ESCROW GÜVENCESİ -->
+    <section style="padding: 4.5rem 0; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff;">
+        <div class="container">
+            <div style="text-align: center; max-width: 650px; margin: 0 auto 3.5rem;">
+                <span class="badge" style="background: rgba(224,99,59,0.2); color: #ff8a65; margin-bottom: 0.8rem;">GÜVENLİ PAZARYERİ ALTYAPISI</span>
+                <h2 style="font-size: 2.2rem; color: #fff; margin-bottom: 0.8rem;">Nasıl Çalışır? Escrow Koruma Nedir?</h2>
+                <p style="color: #94a3b8;">
+                    Instagram üzerinden havale ile alışveriş yaparken yaşadığınız güvensizlik artık geride kaldı.
+                </p>
+            </div>
+
+            <div class="grid-3">
+                <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: var(--radius-md);">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">1️⃣ 🛒</div>
+                    <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 0.6rem;">Beğen & Sipariş Ver</h3>
+                    <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.6;">
+                        İstediğiniz butiğin ürününü seçin. Kişiye özel baskı notunuzu yazıp güvenli sepetinize ekleyin.
+                    </p>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: var(--radius-md);">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">2️⃣ 🔒</div>
+                    <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 0.6rem;">Emanet (Escrow) Ödeme</h3>
+                    <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.6;">
+                        iyzico güvencesiyle ödemeniz havuzda tutulur. Ürün atölye tarafından hazırlanıp kargolanır.
+                    </p>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: var(--radius-md);">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">3️⃣ 📦</div>
+                    <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 0.6rem;">Teslim Al & Onayla</h3>
+                    <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.6;">
+                        Kargonuzu teslim alıp onayladığınızda veya 7 gün sonra ödeme butik üreticinin IBAN hesabına aktarılır.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÜRETİCİ OL ÇAĞRISI -->
+    <section style="padding: 5rem 0;">
+        <div class="container">
+            <div style="background: linear-gradient(135deg, #fff3ee 0%, #faede5 100%); border: 2px dashed var(--color-primary); border-radius: var(--radius-lg); padding: 3.5rem 2rem; text-align: center; max-width: 860px; margin: 0 auto;">
+                <span class="badge badge-custom" style="font-size: 0.9rem; padding: 0.4rem 1rem; margin-bottom: 1rem;">
+                    🎯 BUTİK ÜRETİCİLER İÇİN BÜYÜK FIRSAT
+                </span>
+                <h2 style="font-size: 2.4rem; margin: 0.5rem 0 1rem;">Web Siteniz Yok mu? Sorun Değil!</h2>
+                <p style="font-size: 1.1rem; color: var(--color-dark-muted); line-height: 1.6; max-width: 640px; margin: 0 auto 2rem;">
+                    Instagram profilinizin yanına profesyonel bir pazar yeri landing page'i açın. Sadece yapılan satışlar üzerinden <strong>%10 komisyon</strong> ödeyin; sıfır sabit ücret, sıfır yazılım masrafı.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="/uretici-ol" class="btn btn-primary" style="font-size: 1.05rem; padding: 0.9rem 2rem;">
+                        Hemen Üretici Başvurusu Yap →
+                    </a>
+                    <a href="/panel/producer/register.php" class="btn btn-secondary" style="font-size: 1.05rem; padding: 0.9rem 2rem;" target="_blank">
+                        Kayıt Formunu Doldur
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

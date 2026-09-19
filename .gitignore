@@ -1,0 +1,14 @@
+node_modules/
+.env
+panel/.env
+*.env.local
+panel/uploads/*
+!panel/uploads/**/.gitkeep
+panel/vendor/
+frontend/dist/
+frontend/node_modules/
+.DS_Store
+Thumbs.db
+
+.astro/
+frontend/.astro/

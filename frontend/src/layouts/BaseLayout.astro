@@ -1,0 +1,61 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+    title: string;
+    description?: string;
+    image?: string;
+}
+
+const { 
+    title, 
+    description = "Instagram butik üreticilerini tek çatı altında toplayan, el emeği ve kişiye özel ürünler pazaryeri.",
+    image = "/images/og-default.jpg"
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} — ButikÇarşı</title>
+    <meta name="description" content={description}>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title + " — ButikÇarşı"}>
+    <meta property="og:description" content={description}>
+    <meta property="og:image" content={image}>
+    
+    <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e0633b'><path d='M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z'/></svg>">
+</head>
+<body>
+    <Header />
+    <slot />
+    <Footer />
+
+    <script is:inline>
+        // Simple client cart indicator
+        function updateCartBadge() {
+            try {
+                const cart = JSON.parse(localStorage.getItem('bc_cart') || '[]');
+                const totalCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+                const badge = document.getElementById('header-cart-count');
+                if (badge) {
+                    badge.textContent = totalCount;
+                    badge.style.display = totalCount > 0 ? 'flex' : 'none';
+                }
+            } catch(e) {}
+        }
+        window.addEventListener('DOMContentLoaded', updateCartBadge);
+        window.addEventListener('storage', updateCartBadge);
+    </script>
+</body>
+</html>

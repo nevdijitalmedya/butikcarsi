@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Alışveriş Sepetim">
+    <div class="container" style="padding: 3rem 1.5rem;">
+        <h1 style="font-size: 2.2rem; margin-bottom: 2rem;">Alışveriş Sepetim</h1>
+
+        <div id="cart-empty" class="card" style="padding: 4rem 2rem; text-align: center; display: none;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🛍️</div>
+            <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Sepetiniz henüz boş</h2>
+            <p style="color: #64748b; margin-bottom: 1.5rem;">Instagram butik üreticilerimizin el emeği ürünlerini keşfetmeye ne dersiniz?</p>
+            <a href="/kesfet" class="btn btn-primary">Ürünleri Keşfet</a>
+        </div>
+
+        <div id="cart-content" style="display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start;">
+            <div>
+                <div class="card" style="padding: 1.5rem;">
+                    <div id="cart-items-list">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="card" style="padding: 1.8rem;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 1.2rem;">Sipariş Özeti</h3>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem; font-size: 0.95rem;">
+                        <span style="color: #64748b;">Ürünler Toplamı:</span>
+                        <strong id="cart-subtotal">₺0,00</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem; font-size: 0.95rem;">
+                        <span style="color: #64748b;">Kargo:</span>
+                        <span class="badge badge-free-shipping">Ücretsiz</span>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--color-border); padding-top: 1rem; margin-top: 1rem; display: flex; justify-content: space-between; align-items: baseline;">
+                        <span style="font-size: 1.1rem; font-weight: 700;">Toplam Tutar:</span>
+                        <span id="cart-total" style="font-size: 1.6rem; font-weight: 800; color: var(--color-primary);">₺0,00</span>
+                    </div>
+
+                    <div style="margin-top: 1.5rem;">
+                        <a href="/odeme" class="btn btn-primary btn-block" style="width: 100%; height: 50px; font-size: 1.05rem;">
+                            🔒 Güvenli Ödemeye Geç
+                        </a>
+                    </div>
+
+                    <div style="margin-top: 1.2rem; padding: 0.8rem; background: var(--color-bg); border-radius: var(--radius-sm); font-size: 0.8rem; color: #64748b; line-height: 1.4;">
+                        🛡️ <strong>Escrow Güvencesi:</strong> Ödemeniz siparişiniz size ulaşana dek iyzico emanet havuzunda bekletilir.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script is:inline>
+        function renderCart() {
+            const emptyEl = document.getElementById('cart-empty');
+            const contentEl = document.getElementById('cart-content');
+            const itemsList = document.getElementById('cart-items-list');
+
+            let cart = [];
+            try {
+                cart = JSON.parse(localStorage.getItem('bc_cart') || '[]');
+            } catch(e) {}
+
+            if (cart.length === 0) {
+                emptyEl.style.display = 'block';
+                contentEl.style.display = 'none';
+                return;
+            }
+
+            emptyEl.style.display = 'none';
+            contentEl.style.display = 'grid';
+
+            let subtotal = 0;
+            let html = '';
+
+            cart.forEach((item, idx) => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+
+                html += `
+                    <div style="display: flex; gap: 1.2rem; padding: 1.2rem 0; border-bottom: 1px solid var(--color-border-light); align-items: center;">
+                        <img src="${item.image}" alt="${item.name}" style="width: 75px; height: 75px; object-fit: cover; border-radius: var(--radius-sm);">
+                        <div style="flex: 1;">
+                            <div style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">🏪 ${item.producer_name}</div>
+                            <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem;"><a href="/urun/${item.slug}">${item.name}</a></h4>
+                            ${item.customization ? `<div style="font-size: 0.8rem; color: #b45309; background: #fef3c7; padding: 2px 6px; border-radius: 4px; display: inline-block;">✏️ ${item.customization}</div>` : ''}
+                            <div style="font-size: 0.95rem; font-weight: 700; margin-top: 0.4rem;">₺${item.price.toLocaleString('tr-TR', {minimumFractionDigits: 2})}</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <button onclick="changeQty(${idx}, -1)" class="btn btn-sm btn-secondary" style="padding: 4px 10px;">-</button>
+                            <span style="font-weight: 700; width: 24px; text-align: center;">${item.quantity}</span>
+                            <button onclick="changeQty(${idx}, 1)" class="btn btn-sm btn-secondary" style="padding: 4px 10px;">+</button>
+                        </div>
+                        <div style="text-align: right; min-width: 90px;">
+                            <div style="font-size: 1.1rem; font-weight: 800; color: var(--color-dark);">₺${itemTotal.toLocaleString('tr-TR', {minimumFractionDigits: 2})}</div>
+                            <button onclick="removeItem(${idx})" style="background: none; border: none; color: #ef4444; font-size: 0.8rem; cursor: pointer; margin-top: 4px;">Kaldır</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            itemsList.innerHTML = html;
+            document.getElementById('cart-subtotal').textContent = '₺' + subtotal.toLocaleString('tr-TR', {minimumFractionDigits: 2});
+            document.getElementById('cart-total').textContent = '₺' + subtotal.toLocaleString('tr-TR', {minimumFractionDigits: 2});
+        }
+
+        window.changeQty = function(idx, diff) {
+            let cart = JSON.parse(localStorage.getItem('bc_cart') || '[]');
+            if (cart[idx]) {
+                cart[idx].quantity += diff;
+                if (cart[idx].quantity <= 0) {
+                    cart.splice(idx, 1);
+                }
+                localStorage.setItem('bc_cart', JSON.stringify(cart));
+                window.dispatchEvent(new Event('storage'));
+                renderCart();
+            }
+        };
+
+        window.removeItem = function(idx) {
+            let cart = JSON.parse(localStorage.getItem('bc_cart') || '[]');
+            cart.splice(idx, 1);
+            localStorage.setItem('bc_cart', JSON.stringify(cart));
+            window.dispatchEvent(new Event('storage'));
+            renderCart();
+        };
+
+        window.addEventListener('DOMContentLoaded', renderCart);
+    </script>
+</BaseLayout>
