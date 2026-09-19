@@ -1,0 +1,41 @@
+<IfModule mod_mime.c>
+    AddType image/webp .webp
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Allow direct access to panel
+    RewriteCond %{REQUEST_URI} ^/panel/ [NC]
+    RewriteRule ^ - [L]
+    RewriteRule ^panel$ /panel/ [R=301,L]
+
+    # Rewrite /uploads/ requests directly to /panel/uploads/
+    RewriteRule ^uploads/(.*)$ panel/uploads/$1 [L]
+
+    # Prevent loop if already rewritten to frontend/dist/
+    RewriteRule ^frontend/dist/ - [L]
+
+    # Rewrite root URL to frontend/dist/index.html
+    RewriteRule ^$ frontend/dist/index.html [L]
+
+    # Clean URLs directory index: if folder/index.html exists
+    RewriteCond %{DOCUMENT_ROOT}/frontend/dist/$1/index.html -f
+    RewriteRule ^(.*?)/?$ frontend/dist/$1/index.html [L]
+
+    # Clean URLs fallback: if file.html exists inside frontend/dist
+    RewriteCond %{DOCUMENT_ROOT}/frontend/dist/$1.html -f
+    RewriteRule ^(.*)$ frontend/dist/$1.html [L]
+
+    # If static file exists directly inside frontend/dist
+    RewriteCond %{DOCUMENT_ROOT}/frontend/dist/$1 -f
+    RewriteRule ^(.*)$ frontend/dist/$1 [L]
+
+    # General Fallback to frontend/dist/index.html
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ frontend/dist/index.html [L]
+</IfModule>
+
+Options -Indexes
