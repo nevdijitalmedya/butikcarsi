@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * Response.php â€” JSON API response helpers
+ * Response.php — JSON API response helpers
  */
 
 class Response {

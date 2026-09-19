@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * iyzico Payment Callback â€” ButikÃ‡arÅŸÄ±
+ * iyzico Payment Callback — ButikÇarşı
  */
 require_once __DIR__ . '/../../config.php';
 

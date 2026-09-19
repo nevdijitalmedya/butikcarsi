@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 /**
- * Producer Edit/Create â€” ButikÃ‡arÅŸÄ± Admin
+ * Producer Edit/Create — ButikÇarşı Admin
  */
 require_once __DIR__ . '/../config.php';
-$pageTitle = 'Ãœretici DÃ¼zenle';
+$pageTitle = 'Üretici Düzenle';
 require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/sidebar.php';
 
@@ -44,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $whatsappNumber = trim($_POST['whatsapp_number'] ?? '');
     $approvalNote = trim($_POST['approval_note'] ?? '');
 
-    $v->required('brand_name', $brandName, 'Butik AdÄ±')
-      ->required('owner_name', $ownerName, 'Sahip AdÄ±')
+    $v->required('brand_name', $brandName, 'Butik Adı')
+      ->required('owner_name', $ownerName, 'Sahip Adı')
       ->required('email', $email, 'E-posta')
       ->email('email', $email, 'E-posta');
 
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $iban, $bankName, $taxNumber, $identityNumber, $commissionRate,
                     $status, $isFeatured, $whatsappNumber, $approvalNote,
                     $logoUrl, $coverUrl, $status, $id]);
-                $success = 'Ãœretici gÃ¼ncellendi.';
+                $success = 'Üretici güncellendi.';
                 $producer = Database::query("SELECT * FROM producers WHERE id = ?", [$id]);
             } else {
                 // Create new
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $status, $isFeatured, $whatsappNumber, $approvalNote, $logoUrl, $coverUrl,
                     $passwordHash, $status]);
                 $newId = Database::lastInsertId();
-                $success = "Ãœretici oluÅŸturuldu. GeÃ§ici ÅŸifre: <strong>$password</strong>";
+                $success = "Üretici oluşturuldu. Geçici şifre: <strong>$password</strong>";
                 $producer = Database::query("SELECT * FROM producers WHERE id = ?", [$newId]);
                 $id = $newId;
             }
@@ -123,9 +123,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
         </button>
-        <h2 class="page-title"><?php echo $producer ? htmlspecialchars($producer['brand_name']) : 'Yeni Ãœretici'; ?></h2>
+        <h2 class="page-title"><?php echo $producer ? htmlspecialchars($producer['brand_name']) : 'Yeni Üretici'; ?></h2>
         <div class="topbar-right">
-            <a href="producers.php" class="btn btn-outline">â† Listeye DÃ¶n</a>
+            <a href="producers.php" class="btn btn-outline">← Listeye Dön</a>
         </div>
     </div>
 
@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="card-body">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="brand_name">Butik AdÄ± *</label>
+                                <label for="brand_name">Butik Adı *</label>
                                 <input type="text" id="brand_name" name="brand_name" required value="<?php echo htmlspecialchars($producer['brand_name'] ?? ''); ?>">
                             </div>
                             <div class="form-group">
@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="owner_name">Sahip AdÄ± SoyadÄ± *</label>
+                                <label for="owner_name">Sahip Adı Soyadı *</label>
                                 <input type="text" id="owner_name" name="owner_name" required value="<?php echo htmlspecialchars($producer['owner_name'] ?? ''); ?>">
                             </div>
                             <div class="form-group">
@@ -171,34 +171,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <?php if (!$id): ?>
                         <div class="form-group">
-                            <label for="password">GiriÅŸ Åifresi</label>
-                            <input type="text" id="password" name="password" placeholder="BoÅŸ bÄ±rakÄ±lÄ±rsa otomatik oluÅŸturulur">
+                            <label for="password">Giriş Şifresi</label>
+                            <input type="text" id="password" name="password" placeholder="Boş bırakılırsa otomatik oluşturulur">
                         </div>
                         <?php endif; ?>
                         <div class="form-group">
-                            <label for="description">Butik TanÄ±tÄ±mÄ±</label>
+                            <label for="description">Butik Tanıtımı</label>
                             <textarea id="description" name="description" rows="4"><?php echo htmlspecialchars($producer['description'] ?? ''); ?></textarea>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="city">Åehir</label>
+                                <label for="city">Şehir</label>
                                 <input type="text" id="city" name="city" value="<?php echo htmlspecialchars($producer['city'] ?? ''); ?>">
                             </div>
                             <div class="form-group">
-                                <label for="district">Ä°lÃ§e</label>
+                                <label for="district">İlçe</label>
                                 <input type="text" id="district" name="district" value="<?php echo htmlspecialchars($producer['district'] ?? ''); ?>">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sosyal Medya & GÃ¶rseller -->
+                <!-- Sosyal Medya & Görseller -->
                 <div class="card">
-                    <div class="card-header"><h3>Sosyal Medya & GÃ¶rseller</h3></div>
+                    <div class="card-header"><h3>Sosyal Medya & Görseller</h3></div>
                     <div class="card-body">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="instagram_handle">Instagram @kullanÄ±cÄ±</label>
+                                <label for="instagram_handle">Instagram @kullanıcı</label>
                                 <input type="text" id="instagram_handle" name="instagram_handle" placeholder="@butikadi" value="<?php echo htmlspecialchars($producer['instagram_handle'] ?? ''); ?>">
                             </div>
                             <div class="form-group">
@@ -218,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="logo">Logo / Profil FotoÄŸrafÄ±</label>
+                                <label for="logo">Logo / Profil Fotoğrafı</label>
                                 <input type="file" id="logo" name="logo" accept="image/*" data-preview="logoPreview">
                                 <?php if ($producer['logo_url'] ?? null): ?>
                                     <img id="logoPreview" src="<?php echo '../uploads/' . basename(dirname($producer['logo_url'])) . '/' . basename($producer['logo_url']); ?>" style="max-width:120px;border-radius:8px;margin-top:0.5rem;">
@@ -227,7 +227,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <?php endif; ?>
                             </div>
                             <div class="form-group">
-                                <label for="cover_image">Kapak GÃ¶rseli</label>
+                                <label for="cover_image">Kapak Görseli</label>
                                 <input type="file" id="cover_image" name="cover_image" accept="image/*" data-preview="coverPreview">
                                 <?php if ($producer['cover_image_url'] ?? null): ?>
                                     <img id="coverPreview" src="<?php echo '../uploads/' . basename(dirname($producer['cover_image_url'])) . '/' . basename($producer['cover_image_url']); ?>" style="max-width:200px;border-radius:8px;margin-top:0.5rem;">
@@ -264,7 +264,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="commission_rate">Komisyon OranÄ± (%)</label>
+                            <label for="commission_rate">Komisyon Oranı (%)</label>
                             <input type="number" id="commission_rate" name="commission_rate" step="0.01" min="0" max="50" value="<?php echo $producer['commission_rate'] ?? '10.00'; ?>">
                         </div>
                     </div>
@@ -277,7 +277,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="form-group">
                             <label for="status">Durum</label>
                             <select id="status" name="status">
-                                <?php foreach (['pending'=>'Beklemede','approved'=>'OnaylÄ±','suspended'=>'AskÄ±ya AlÄ±ndÄ±','rejected'=>'Reddedildi'] as $val => $lbl): ?>
+                                <?php foreach (['pending'=>'Beklemede','approved'=>'Onaylı','suspended'=>'Askıya Alındı','rejected'=>'Reddedildi'] as $val => $lbl): ?>
                                 <option value="<?php echo $val; ?>" <?php echo ($producer['status'] ?? 'pending') === $val ? 'selected' : ''; ?>><?php echo $lbl; ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -289,11 +289,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="form-group">
                             <label>
                                 <input type="checkbox" name="is_featured" <?php echo ($producer['is_featured'] ?? 0) ? 'checked' : ''; ?>>
-                                â­ Ã–ne Ã‡Ä±kan Ãœretici (Anasayfada gÃ¶ster)
+                                Öne Çıkan Üretici (Anasayfada göster)
                             </label>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-block"><?php echo $id ? 'GÃ¼ncelle' : 'Ãœretici OluÅŸtur'; ?></button>
+                        <button type="submit" class="btn btn-primary btn-block"><?php echo $id ? 'Güncelle' : 'Üretici Oluştur'; ?></button>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
-﻿<?php
+<?php
 /**
- * config.php â€” Central Application Bootstrap and Autoloader
- * ButikÃ‡arÅŸÄ± Marketplace Platform
+ * config.php — Central Application Bootstrap and Autoloader
+ * ButikÇarşı Marketplace Platform
  */
 
 if (!defined('PANEL_PATH')) {
@@ -25,14 +25,13 @@ spl_autoload_register(function ($class) {
 // Initialize Config Loader
 Config::init();
 
-// Initialize Database connection
+// Initialize Database connection safely
 try {
     Database::connect();
 } catch (Exception $e) {
-    if (Config::get('APP_DEBUG', false)) {
-        die("Database connection failed: " . $e->getMessage());
-    }
-    die("Database connection failed. Check your database setup and .env file.");
+    $dbException = $e;
+    require_once PANEL_PATH . '/setup-notice.php';
+    exit;
 }
 
 // Start Session safely

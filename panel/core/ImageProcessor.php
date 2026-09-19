@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * ImageProcessor.php â€” Image upload, resize, WebP conversion
+ * ImageProcessor.php — Image upload, resize, WebP conversion
  */
 
 class ImageProcessor {
@@ -26,12 +26,12 @@ class ImageProcessor {
         // Validate file
         $allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
         if (!in_array($file['type'], $allowedTypes)) {
-            throw new Exception('GeÃ§ersiz dosya tÃ¼rÃ¼. Sadece JPG, PNG, WebP ve GIF desteklenir.');
+            throw new Exception('Geçersiz dosya türü. Sadece JPG, PNG, WebP ve GIF desteklenir.');
         }
 
         $maxSize = 10 * 1024 * 1024; // 10MB
         if ($file['size'] > $maxSize) {
-            throw new Exception('Dosya boyutu Ã§ok bÃ¼yÃ¼k. Maksimum 10MB.');
+            throw new Exception('Dosya boyutu çok büyük. Maksimum 10MB.');
         }
 
         // Generate unique filename
@@ -45,7 +45,7 @@ class ImageProcessor {
 
         // Move uploaded file
         if (!move_uploaded_file($file['tmp_name'], $originalPath)) {
-            throw new Exception('Dosya yÃ¼klenemedi.');
+            throw new Exception('Dosya yüklenemedi.');
         }
 
         $result = [

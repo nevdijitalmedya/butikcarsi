@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * Auth.php â€” Session-based authentication for both Admin and Producer panels
+ * Auth.php — Session-based authentication for both Admin and Producer panels
  */
 
 class Auth {

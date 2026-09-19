@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * Categories Management â€” ButikÃ‡arÅŸÄ± Admin
+ * Categories Management — ButikÇarşı Admin
  */
 require_once __DIR__ . '/../config.php';
 $pageTitle = 'Kategoriler';
@@ -69,7 +69,7 @@ if (!empty($_GET['edit'])) {
             <!-- Category Form -->
             <div class="card">
                 <div class="card-header">
-                    <h3><?php echo $editCategory ? 'Kategori DÃ¼zenle' : 'Yeni Kategori'; ?></h3>
+                    <h3><?php echo $editCategory ? 'Kategori Düzenle' : 'Yeni Kategori'; ?></h3>
                 </div>
                 <div class="card-body">
                     <form method="POST">
@@ -79,22 +79,22 @@ if (!empty($_GET['edit'])) {
                         <?php endif; ?>
 
                         <div class="form-group">
-                            <label for="name">Kategori AdÄ±</label>
+                            <label for="name">Kategori Adı</label>
                             <input type="text" id="name" name="name" required value="<?php echo htmlspecialchars($editCategory['name'] ?? ''); ?>">
                         </div>
                         <div class="form-group">
                             <label for="slug">Slug</label>
                             <input type="text" id="slug" name="slug" value="<?php echo htmlspecialchars($editCategory['slug'] ?? ''); ?>">
-                            <p class="form-hint">BoÅŸ bÄ±rakÄ±lÄ±rsa otomatik oluÅŸturulur.</p>
+                            <p class="form-hint">Boş bırakılırsa otomatik oluşturulur.</p>
                         </div>
                         <div class="form-group">
-                            <label for="icon_class">Ä°kon (Lucide)</label>
+                            <label for="icon_class">İkon (Lucide)</label>
                             <input type="text" id="icon_class" name="icon_class" placeholder="sparkles, palette, heart..." value="<?php echo htmlspecialchars($editCategory['icon_class'] ?? ''); ?>">
                         </div>
                         <div class="form-group">
-                            <label for="parent_id">Ãœst Kategori</label>
+                            <label for="parent_id">Üst Kategori</label>
                             <select id="parent_id" name="parent_id">
-                                <option value="">â€” Ana Kategori â€”</option>
+                                <option value="">— Ana Kategori —</option>
                                 <?php foreach ($categories as $cat): ?>
                                     <?php if (($editCategory['id'] ?? 0) !== $cat['id']): ?>
                                     <option value="<?php echo $cat['id']; ?>" <?php echo ($editCategory['parent_id'] ?? '') == $cat['id'] ? 'selected' : ''; ?>>
@@ -106,7 +106,7 @@ if (!empty($_GET['edit'])) {
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="sort_order">SÄ±ra</label>
+                                <label for="sort_order">Sıra</label>
                                 <input type="number" id="sort_order" name="sort_order" value="<?php echo $editCategory['sort_order'] ?? 0; ?>">
                             </div>
                             <div class="form-group" style="display:flex;align-items:flex-end;padding-bottom:0.5rem;">
@@ -117,12 +117,12 @@ if (!empty($_GET['edit'])) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="description">AÃ§Ä±klama</label>
+                            <label for="description">Açıklama</label>
                             <textarea id="description" name="description" rows="2"><?php echo htmlspecialchars($editCategory['description'] ?? ''); ?></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary"><?php echo $editCategory ? 'GÃ¼ncelle' : 'Ekle'; ?></button>
+                        <button type="submit" class="btn btn-primary"><?php echo $editCategory ? 'Güncelle' : 'Ekle'; ?></button>
                         <?php if ($editCategory): ?>
-                            <a href="categories.php" class="btn btn-outline">Ä°ptal</a>
+                            <a href="categories.php" class="btn btn-outline">İptal</a>
                         <?php endif; ?>
                     </form>
                 </div>
@@ -137,13 +137,13 @@ if (!empty($_GET['edit'])) {
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>SÄ±ra</th>
+                                <th>Sıra</th>
                                 <th>Kategori</th>
                                 <th>Slug</th>
-                                <th>Ãœst</th>
-                                <th>ÃœrÃ¼n</th>
+                                <th>Üst</th>
+                                <th>Ürün</th>
                                 <th>Durum</th>
-                                <th>Ä°ÅŸlem</th>
+                                <th>İşlem</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -152,7 +152,7 @@ if (!empty($_GET['edit'])) {
                                 <td class="text-muted"><?php echo $cat['sort_order']; ?></td>
                                 <td class="text-bold"><?php echo htmlspecialchars($cat['name']); ?></td>
                                 <td class="text-muted text-sm"><?php echo htmlspecialchars($cat['slug']); ?></td>
-                                <td class="text-muted text-sm"><?php echo htmlspecialchars($cat['parent_name'] ?? 'â€”'); ?></td>
+                                <td class="text-muted text-sm"><?php echo htmlspecialchars($cat['parent_name'] ?? '—'); ?></td>
                                 <td class="text-center"><?php echo $cat['product_count']; ?></td>
                                 <td>
                                     <span class="badge badge--<?php echo $cat['is_active'] ? 'approved' : 'draft'; ?>">
@@ -161,11 +161,11 @@ if (!empty($_GET['edit'])) {
                                 </td>
                                 <td>
                                     <div class="action-group">
-                                        <a href="categories.php?edit=<?php echo $cat['id']; ?>" class="btn btn-xs btn-outline">âœï¸</a>
+                                        <a href="categories.php?edit=<?php echo $cat['id']; ?>" class="btn btn-xs btn-outline">Düzenle</a>
                                         <form method="POST" style="display:inline">
                                             <input type="hidden" name="action" value="delete">
                                             <input type="hidden" name="id" value="<?php echo $cat['id']; ?>">
-                                            <button type="submit" class="btn btn-xs btn-outline" data-confirm="Bu kategoriyi silmek istediÄŸinize emin misiniz?" style="color:var(--danger)">ğŸ—‘ï¸</button>
+                                            <button type="submit" class="btn btn-xs btn-outline" data-confirm="Bu kategoriyi silmek istediğinize emin misiniz?" style="color:var(--danger)">Sil</button>
                                         </form>
                                     </div>
                                 </td>

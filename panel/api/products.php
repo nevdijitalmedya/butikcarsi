@@ -1,12 +1,12 @@
-﻿<?php
+<?php
 /**
  * Public API: Products
- * GET /api/products.php                     â€” List approved products
- * GET /api/products.php?slug=xxx            â€” Single product by slug
- * GET /api/products.php?category=slug       â€” Filter by category
- * GET /api/products.php?producer=slug       â€” Filter by producer
- * GET /api/products.php?featured=1          â€” Featured only
- * GET /api/products.php?q=search            â€” Search
+ * GET /api/products.php                     — List approved products
+ * GET /api/products.php?slug=xxx            — Single product by slug
+ * GET /api/products.php?category=slug       — Filter by category
+ * GET /api/products.php?producer=slug       — Filter by producer
+ * GET /api/products.php?featured=1          — Featured only
+ * GET /api/products.php?q=search            — Search
  */
 require_once __DIR__ . '/../config.php';
 Response::handleOptions();
@@ -32,7 +32,7 @@ if ($slug) {
     ", [$slug]);
 
     if (!$product) {
-        Response::error('ÃœrÃ¼n bulunamadÄ±.', 404);
+        Response::error('Ürün bulunamadı.', 404);
     }
 
     // Images

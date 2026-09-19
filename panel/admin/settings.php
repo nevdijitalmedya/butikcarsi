@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * Platform Settings â€” ButikÃ‡arÅŸÄ± Admin
+ * Platform Settings — ButikÇarşı Admin
  */
 require_once __DIR__ . '/../config.php';
 $pageTitle = 'Ayarlar';
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     foreach ($settings as $key => $value) {
         Config::updateSetting($key, trim($value));
     }
-    $success = 'Ayarlar gÃ¼ncellendi.';
+    $success = 'Ayarlar güncellendi.';
 }
 
 // Group settings
@@ -21,7 +21,7 @@ $settingGroups = [
     'Genel' => ['site_name','tagline','email','phone','logo_url','favicon_url','primary_color','secondary_color','accent_color'],
     'Sosyal Medya' => ['social_instagram','social_tiktok'],
     'Komisyon & Finans' => ['default_commission_rate','currency','auto_approval_days'],
-    'iyzico Ã–deme' => ['iyzico_api_key','iyzico_secret_key','iyzico_base_url'],
+    'iyzico Ödeme' => ['iyzico_api_key','iyzico_secret_key','iyzico_base_url'],
     'E-posta (SMTP)' => ['smtp_host','smtp_port','smtp_user','smtp_pass','smtp_from_name','smtp_from_email'],
 ];
 
@@ -32,14 +32,14 @@ foreach ($allSettings as $s) {
 }
 
 $labels = [
-    'site_name' => 'Site AdÄ±', 'tagline' => 'Slogan', 'email' => 'E-posta', 'phone' => 'Telefon',
+    'site_name' => 'Site Adı', 'tagline' => 'Slogan', 'email' => 'E-posta', 'phone' => 'Telefon',
     'logo_url' => 'Logo URL', 'favicon_url' => 'Favicon URL', 'social_instagram' => 'Instagram',
-    'social_tiktok' => 'TikTok', 'default_commission_rate' => 'VarsayÄ±lan Komisyon (%)',
-    'currency' => 'Para Birimi', 'auto_approval_days' => 'Otomatik Onay SÃ¼resi (gÃ¼n)',
+    'social_tiktok' => 'TikTok', 'default_commission_rate' => 'Varsayılan Komisyon (%)',
+    'currency' => 'Para Birimi', 'auto_approval_days' => 'Otomatik Onay Süresi (gün)',
     'iyzico_api_key' => 'API Key', 'iyzico_secret_key' => 'Secret Key', 'iyzico_base_url' => 'Base URL',
-    'smtp_host' => 'SMTP Host', 'smtp_port' => 'Port', 'smtp_user' => 'KullanÄ±cÄ±', 'smtp_pass' => 'Åifre',
-    'smtp_from_name' => 'GÃ¶nderen AdÄ±', 'smtp_from_email' => 'GÃ¶nderen E-posta',
-    'primary_color' => 'Ana Renk', 'secondary_color' => 'Ä°kincil Renk', 'accent_color' => 'Vurgu Renk',
+    'smtp_host' => 'SMTP Host', 'smtp_port' => 'Port', 'smtp_user' => 'Kullanıcı', 'smtp_pass' => 'Şifre',
+    'smtp_from_name' => 'Gönderen Adı', 'smtp_from_email' => 'Gönderen E-posta',
+    'primary_color' => 'Ana Renk', 'secondary_color' => 'İkincil Renk', 'accent_color' => 'Vurgu Renk',
 ];
 ?>
 
@@ -50,7 +50,7 @@ $labels = [
                 <line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
         </button>
-        <h2 class="page-title">Platform AyarlarÄ±</h2>
+        <h2 class="page-title">Platform Ayarları</h2>
     </div>
     <div class="admin-content">
         <?php if ($success): ?><div class="alert alert-success"><?php echo $success; ?></div><?php endif; ?>
@@ -76,7 +76,7 @@ $labels = [
                 </div>
             </div>
             <?php endforeach; ?>
-            <button type="submit" class="btn btn-primary">AyarlarÄ± Kaydet</button>
+            <button type="submit" class="btn btn-primary">Ayarları Kaydet</button>
         </form>
     </div>
 </main>

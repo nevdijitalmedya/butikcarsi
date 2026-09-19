@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 /**
- * Products Management â€” ButikÃ‡arÅŸÄ± Admin
+ * Products Management — ButikÇarşı Admin
  */
 require_once __DIR__ . '/../config.php';
-$pageTitle = 'ÃœrÃ¼nler';
+$pageTitle = 'Ürünler';
 require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/sidebar.php';
 
@@ -70,19 +70,19 @@ foreach ($statusCounts as $sc) { $statusMap[$sc['status']] = $sc['cnt']; }
                 <line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
         </button>
-        <h2 class="page-title">ÃœrÃ¼nler</h2>
+        <h2 class="page-title">Ürünler</h2>
     </div>
     <div class="admin-content">
         <div class="filter-bar">
             <div class="filter-tabs">
-                <a href="products.php" class="filter-tab <?php echo !$statusFilter ? 'active' : ''; ?>">TÃ¼mÃ¼ <span class="filter-count"><?php echo $total; ?></span></a>
-                <?php foreach (['pending'=>'Bekleyen','approved'=>'OnaylÄ±','draft'=>'Taslak','rejected'=>'Reddedilen'] as $k=>$l): ?>
+                <a href="products.php" class="filter-tab <?php echo !$statusFilter ? 'active' : ''; ?>">Tümü <span class="filter-count"><?php echo $total; ?></span></a>
+                <?php foreach (['pending'=>'Bekleyen','approved'=>'Onaylı','draft'=>'Taslak','rejected'=>'Reddedilen'] as $k=>$l): ?>
                 <a href="products.php?status=<?php echo $k; ?>" class="filter-tab <?php echo $statusFilter===$k?'active':''; ?>"><?php echo $l; ?> <span class="filter-count"><?php echo $statusMap[$k]??0; ?></span></a>
                 <?php endforeach; ?>
             </div>
             <form method="GET" class="search-form">
                 <?php if($statusFilter): ?><input type="hidden" name="status" value="<?php echo htmlspecialchars($statusFilter); ?>"><?php endif; ?>
-                <input type="text" name="q" placeholder="ÃœrÃ¼n veya Ã¼retici ara..." value="<?php echo htmlspecialchars($search); ?>" class="search-input">
+                <input type="text" name="q" placeholder="Ürün veya üretici ara..." value="<?php echo htmlspecialchars($search); ?>" class="search-input">
                 <button type="submit" class="btn btn-sm btn-outline">Ara</button>
             </form>
         </div>
@@ -90,10 +90,10 @@ foreach ($statusCounts as $sc) { $statusMap[$sc['status']] = $sc['cnt']; }
         <div class="card">
             <div class="card-body">
                 <?php if(empty($products)): ?>
-                    <p class="text-muted text-center">ÃœrÃ¼n bulunamadÄ±.</p>
+                    <p class="text-muted text-center">Ürün bulunamadı.</p>
                 <?php else: ?>
                 <table class="data-table">
-                    <thead><tr><th>ÃœrÃ¼n</th><th>Ãœretici</th><th>Fiyat</th><th>Stok</th><th>Durum</th><th>Tarih</th><th>Ä°ÅŸlem</th></tr></thead>
+                    <thead><tr><th>Ürün</th><th>Üretici</th><th>Fiyat</th><th>Stok</th><th>Durum</th><th>Tarih</th><th>İşlem</th></tr></thead>
                     <tbody>
                     <?php foreach($products as $p): ?>
                     <tr>
@@ -113,10 +113,10 @@ foreach ($statusCounts as $sc) { $statusMap[$sc['status']] = $sc['cnt']; }
                         <td><a href="producer-edit.php?id=<?php echo $p['producer_id']; ?>" class="link"><?php echo htmlspecialchars($p['producer_name']); ?></a></td>
                         <td>
                             <?php if($p['sale_price']): ?>
-                                <span style="text-decoration:line-through;color:var(--text-dim);">â‚º<?php echo number_format($p['regular_price'],2,',','.'); ?></span><br>
-                                <span class="text-bold" style="color:var(--success);">â‚º<?php echo number_format($p['sale_price'],2,',','.'); ?></span>
+                                <span style="text-decoration:line-through;color:var(--text-dim);">₺<?php echo number_format($p['regular_price'],2,',','.'); ?></span><br>
+                                <span class="text-bold" style="color:var(--success);">₺<?php echo number_format($p['sale_price'],2,',','.'); ?></span>
                             <?php else: ?>
-                                <span class="text-bold">â‚º<?php echo number_format($p['regular_price'],2,',','.'); ?></span>
+                                <span class="text-bold">₺<?php echo number_format($p['regular_price'],2,',','.'); ?></span>
                             <?php endif; ?>
                         </td>
                         <td><span class="badge badge--<?php echo $p['stock_status']==='instock'?'approved':'rejected'; ?>"><?php echo $p['stock_status']; ?></span></td>
@@ -125,9 +125,9 @@ foreach ($statusCounts as $sc) { $statusMap[$sc['status']] = $sc['cnt']; }
                         <td>
                             <div class="action-group">
                                 <?php if($p['status']==='pending'): ?>
-                                <form method="POST" style="display:inline"><input type="hidden" name="id" value="<?php echo $p['id']; ?>"><input type="hidden" name="action" value="approve"><button class="btn btn-xs btn-success" title="Onayla">âœ“</button></form>
+                                <form method="POST" style="display:inline"><input type="hidden" name="id" value="<?php echo $p['id']; ?>"><input type="hidden" name="action" value="approve"><button class="btn btn-xs btn-success" title="Onayla">Onayla</button></form>
                                 <?php endif; ?>
-                                <form method="POST" style="display:inline"><input type="hidden" name="id" value="<?php echo $p['id']; ?>"><input type="hidden" name="action" value="feature"><button class="btn btn-xs <?php echo $p['is_featured']?'btn-amber':'btn-outline'; ?>" title="Ã–ne Ã‡Ä±kar">â­</button></form>
+                                <form method="POST" style="display:inline"><input type="hidden" name="id" value="<?php echo $p['id']; ?>"><input type="hidden" name="action" value="feature"><button class="btn btn-xs <?php echo $p['is_featured']?'btn-amber':'btn-outline'; ?>" title="Öne Çıkar">Öne Çıkar</button></form>
                             </div>
                         </td>
                     </tr>

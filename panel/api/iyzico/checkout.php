@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * iyzico Marketplace Checkout Initialization
  * POST /api/iyzico/checkout.php
@@ -14,7 +14,7 @@ $rawInput = file_get_contents('php://input');
 $data = json_decode($rawInput, true);
 
 if (!$data || empty($data['items']) || empty($data['buyer'])) {
-    Response::error('GeÃ§ersiz sepet verisi.', 400);
+    Response::error('Geçersiz sepet verisi.', 400);
 }
 
 try {
@@ -29,7 +29,7 @@ try {
         ", [$item['product_id']]);
 
         if (!$product) {
-            Response::error("ÃœrÃ¼n bulunamadÄ±: " . ($item['product_name'] ?? ''), 400);
+            Response::error("Ürün bulunamadı: " . ($item['product_name'] ?? ''), 400);
         }
 
         $cartItems[] = [
@@ -49,7 +49,7 @@ try {
 
     // Create order
     $orderData = [
-        'customer_name' => $data['buyer']['name'] ?? 'MÃ¼ÅŸteri',
+        'customer_name' => $data['buyer']['name'] ?? 'Müşteri',
         'customer_email' => $data['buyer']['email'] ?? '',
         'customer_phone' => $data['buyer']['phone'] ?? '',
         'customer_note' => $data['buyer']['note'] ?? '',
@@ -88,9 +88,9 @@ try {
     } else {
         // Cleanup: delete order on payment init failure
         Database::execute("DELETE FROM orders WHERE id = ?", [$orderId]);
-        Response::error($result['errorMessage'] ?? 'Ã–deme formu oluÅŸturulamadÄ±.', 500);
+        Response::error($result['errorMessage'] ?? 'Ödeme formu oluşturulamadı.', 500);
     }
 
 } catch (Exception $e) {
-    Response::error('SipariÅŸ oluÅŸturulurken hata: ' . $e->getMessage(), 500);
+    Response::error('Sipariş oluşturulurken hata: ' . $e->getMessage(), 500);
 }

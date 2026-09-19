@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * Admin Dashboard â€” ButikÃ‡arÅŸÄ±
+ * Admin Dashboard — ButikÇarşı
  */
 require_once __DIR__ . '/../config.php';
 $pageTitle = 'Dashboard';
@@ -61,7 +61,7 @@ $pendingProductsList = Database::queryAll("
                 </div>
                 <div class="stat-info">
                     <span class="stat-value"><?php echo number_format($totalProducers); ?></span>
-                    <span class="stat-label">Aktif Ãœretici</span>
+                    <span class="stat-label">Aktif Üretici</span>
                 </div>
             </div>
             <div class="stat-card stat-card--blue">
@@ -70,7 +70,7 @@ $pendingProductsList = Database::queryAll("
                 </div>
                 <div class="stat-info">
                     <span class="stat-value"><?php echo number_format($totalProducts); ?></span>
-                    <span class="stat-label">Aktif ÃœrÃ¼n</span>
+                    <span class="stat-label">Aktif Ürün</span>
                 </div>
             </div>
             <div class="stat-card stat-card--green">
@@ -79,7 +79,7 @@ $pendingProductsList = Database::queryAll("
                 </div>
                 <div class="stat-info">
                     <span class="stat-value"><?php echo number_format($totalOrders); ?></span>
-                    <span class="stat-label">Toplam SipariÅŸ</span>
+                    <span class="stat-label">Toplam Sipariş</span>
                 </div>
             </div>
             <div class="stat-card stat-card--amber">
@@ -87,7 +87,7 @@ $pendingProductsList = Database::queryAll("
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
                 </div>
                 <div class="stat-info">
-                    <span class="stat-value">â‚º<?php echo number_format($totalRevenue, 2, ',', '.'); ?></span>
+                    <span class="stat-value">₺<?php echo number_format($totalRevenue, 2, ',', '.'); ?></span>
                     <span class="stat-label">Toplam Ciro</span>
                 </div>
             </div>
@@ -96,7 +96,7 @@ $pendingProductsList = Database::queryAll("
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
                 </div>
                 <div class="stat-info">
-                    <span class="stat-value">â‚º<?php echo number_format($totalCommission, 2, ',', '.'); ?></span>
+                    <span class="stat-value">₺<?php echo number_format($totalCommission, 2, ',', '.'); ?></span>
                     <span class="stat-label">Komisyon Geliri</span>
                 </div>
             </div>
@@ -107,8 +107,8 @@ $pendingProductsList = Database::queryAll("
             <?php if (!empty($pendingProducersList)): ?>
             <div class="card">
                 <div class="card-header">
-                    <h3>Onay Bekleyen Ãœreticiler</h3>
-                    <a href="producers.php?status=pending" class="btn btn-sm btn-outline">TÃ¼mÃ¼nÃ¼ GÃ¶r</a>
+                    <h3>Onay Bekleyen Üreticiler</h3>
+                    <a href="producers.php?status=pending" class="btn btn-sm btn-outline">Tümünü Gör</a>
                 </div>
                 <div class="card-body">
                     <div class="approval-list">
@@ -119,7 +119,7 @@ $pendingProductsList = Database::queryAll("
                                 <strong><?php echo htmlspecialchars($p['brand_name']); ?></strong>
                                 <span><?php echo htmlspecialchars($p['owner_name']); ?> Â· <?php echo htmlspecialchars($p['city'] ?? ''); ?></span>
                             </div>
-                            <a href="producer-edit.php?id=<?php echo $p['id']; ?>" class="btn btn-sm btn-primary">Ä°ncele</a>
+                            <a href="producer-edit.php?id=<?php echo $p['id']; ?>" class="btn btn-sm btn-primary">İncele</a>
                         </div>
                         <?php endforeach; ?>
                     </div>
@@ -130,8 +130,8 @@ $pendingProductsList = Database::queryAll("
             <?php if (!empty($pendingProductsList)): ?>
             <div class="card">
                 <div class="card-header">
-                    <h3>Onay Bekleyen ÃœrÃ¼nler</h3>
-                    <a href="products.php?status=pending" class="btn btn-sm btn-outline">TÃ¼mÃ¼nÃ¼ GÃ¶r</a>
+                    <h3>Onay Bekleyen Ürünler</h3>
+                    <a href="products.php?status=pending" class="btn btn-sm btn-outline">Tümünü Gör</a>
                 </div>
                 <div class="card-body">
                     <div class="approval-list">
@@ -139,9 +139,9 @@ $pendingProductsList = Database::queryAll("
                         <div class="approval-item">
                             <div class="approval-info">
                                 <strong><?php echo htmlspecialchars($p['name']); ?></strong>
-                                <span><?php echo htmlspecialchars($p['producer_name']); ?> Â· â‚º<?php echo number_format($p['regular_price'], 2, ',', '.'); ?></span>
+                                <span><?php echo htmlspecialchars($p['producer_name']); ?> Â· ₺<?php echo number_format($p['regular_price'], 2, ',', '.'); ?></span>
                             </div>
-                            <a href="product-edit.php?id=<?php echo $p['id']; ?>" class="btn btn-sm btn-primary">Ä°ncele</a>
+                            <a href="product-edit.php?id=<?php echo $p['id']; ?>" class="btn btn-sm btn-primary">İncele</a>
                         </div>
                         <?php endforeach; ?>
                     </div>
@@ -152,21 +152,21 @@ $pendingProductsList = Database::queryAll("
             <!-- Recent Orders -->
             <div class="card card--full">
                 <div class="card-header">
-                    <h3>Son SipariÅŸler</h3>
-                    <a href="orders.php" class="btn btn-sm btn-outline">TÃ¼mÃ¼nÃ¼ GÃ¶r</a>
+                    <h3>Son Siparişler</h3>
+                    <a href="orders.php" class="btn btn-sm btn-outline">Tümünü Gör</a>
                 </div>
                 <div class="card-body">
                     <?php if (empty($recentOrders)): ?>
-                        <p class="text-muted">HenÃ¼z sipariÅŸ bulunmuyor.</p>
+                        <p class="text-muted">Henüz sipariş bulunmuyor.</p>
                     <?php else: ?>
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>SipariÅŸ No</th>
-                                <th>MÃ¼ÅŸteri</th>
+                                <th>Sipariş No</th>
+                                <th>Müşteri</th>
                                 <th>Tutar</th>
                                 <th>Durum</th>
-                                <th>Ã–deme</th>
+                                <th>Ödeme</th>
                                 <th>Tarih</th>
                             </tr>
                         </thead>
@@ -175,7 +175,7 @@ $pendingProductsList = Database::queryAll("
                             <tr>
                                 <td><a href="order-detail.php?id=<?php echo $order['id']; ?>" class="link"><?php echo htmlspecialchars($order['order_number']); ?></a></td>
                                 <td><?php echo htmlspecialchars($order['customer_name']); ?></td>
-                                <td class="text-bold">â‚º<?php echo number_format($order['grand_total'], 2, ',', '.'); ?></td>
+                                <td class="text-bold">₺<?php echo number_format($order['grand_total'], 2, ',', '.'); ?></td>
                                 <td><span class="badge badge--<?php echo $order['status']; ?>"><?php echo ucfirst($order['status']); ?></span></td>
                                 <td><span class="badge badge--<?php echo $order['payment_status']; ?>"><?php echo ucfirst($order['payment_status']); ?></span></td>
                                 <td class="text-muted"><?php echo date('d.m.Y H:i', strtotime($order['created_at'])); ?></td>
