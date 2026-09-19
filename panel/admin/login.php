@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * Admin Login Page â€” ButikÃ‡arÅŸÄ± Platform
+ * Admin Login Page — ButikÇarşı Platform
  */
 require_once __DIR__ . '/../config.php';
 
@@ -14,18 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: index.php');
         exit;
     } else {
-        $error = 'GeÃ§ersiz kullanÄ±cÄ± adÄ± veya ÅŸifre.';
+        $error = 'Geçersiz kullanıcı adı veya şifre.';
     }
 }
 
-$siteName = Config::setting('site_name', 'ButikÃ‡arÅŸÄ±');
+$siteName = Config::setting('site_name', 'ButikÇarşı');
 ?>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin GiriÅŸ â€” <?php echo htmlspecialchars($siteName); ?></title>
+    <title>Admin Giriş — <?php echo htmlspecialchars($siteName); ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/admin.css">
 </head>
@@ -40,8 +40,8 @@ $siteName = Config::setting('site_name', 'ButikÃ‡arÅŸÄ±');
                         <path d="M16 10a4 4 0 0 1-8 0"></path>
                     </svg>
                 </div>
-                <h1>ButikÃ‡arÅŸÄ±</h1>
-                <p>Platform YÃ¶netim Paneli</p>
+                <h1>ButikÇarşı</h1>
+                <p>Platform Yönetim Paneli</p>
             </div>
 
             <?php if ($error): ?>
@@ -50,18 +50,18 @@ $siteName = Config::setting('site_name', 'ButikÃ‡arÅŸÄ±');
 
             <form method="POST" class="login-form">
                 <div class="form-group">
-                    <label for="username">KullanÄ±cÄ± AdÄ±</label>
+                    <label for="username">Kullanıcı Adı</label>
                     <input type="text" id="username" name="username" required autofocus
                            placeholder="admin" value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>">
                 </div>
                 <div class="form-group">
-                    <label for="password">Åifre</label>
-                    <input type="password" id="password" name="password" required placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢">
+                    <label for="password">Şifre</label>
+                    <input type="password" id="password" name="password" required placeholder="••••••••">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">GiriÅŸ Yap</button>
+                <button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
             </form>
         </div>
-        <p class="login-footer-text">&copy; <?php echo date('Y'); ?> ButikÃ‡arÅŸÄ± â€” TÃ¼m haklarÄ± saklÄ±dÄ±r.</p>
+        <p class="login-footer-text">&copy; <?php echo date('Y'); ?> ButikÇarşı — Tüm hakları saklıdır.</p>
     </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * Producer Registration / Application Form â€” ButikÃ‡arÅŸÄ±
+ * Producer Registration / Application Form — ButikÇarşı
  */
 require_once __DIR__ . '/../config.php';
 
@@ -20,22 +20,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $city = trim($_POST['city'] ?? '');
     $description = trim($_POST['description'] ?? '');
 
-    $v->required('brand_name', $brandName, 'Butik AdÄ±')
+    $v->required('brand_name', $brandName, 'Butik Adı')
       ->required('owner_name', $ownerName, 'Ad Soyad')
       ->required('email', $email, 'E-posta')
       ->email('email', $email, 'E-posta')
-      ->required('password', $password, 'Åifre')
-      ->minLength('password', $password, 6, 'Åifre');
+      ->required('password', $password, 'Şifre')
+      ->minLength('password', $password, 6, 'Şifre');
 
     if ($password !== $passwordConfirm) {
-        $error = 'Åifreler eÅŸleÅŸmiyor.';
+        $error = 'Şifreler eşleşmiyor.';
     } elseif ($v->hasErrors()) {
         $error = $v->firstError();
     } else {
         // Check existing
         $existing = Database::query("SELECT id FROM producers WHERE email = ?", [$email]);
         if ($existing) {
-            $error = 'Bu e-posta adresi zaten kayÄ±tlÄ±.';
+            $error = 'Bu e-posta adresi zaten kayıtlı.';
         } else {
             $slug = Validator::makeSlug($brandName);
             // Ensure unique slug
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ãœretici BaÅŸvurusu â€” ButikÃ‡arÅŸÄ±</title>
+    <title>Üretici Başvurusu — ButikÇarşı</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../admin/assets/css/admin.css">
     <style>
@@ -81,15 +81,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="success-icon">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
             </div>
-            <h2>BaÅŸvurunuz AlÄ±ndÄ±!</h2>
-            <p style="color:var(--text-muted);margin:1rem 0;">BaÅŸvurunuz incelendikten sonra e-posta ile bilgilendirileceksiniz. Bu sÃ¼reÃ§ genellikle 1-2 iÅŸ gÃ¼nÃ¼ sÃ¼rmektedir.</p>
-            <a href="login.php" class="btn btn-primary">GiriÅŸ SayfasÄ±na DÃ¶n</a>
+            <h2>Başvurunuz Alındı!</h2>
+            <p style="color:var(--text-muted);margin:1rem 0;">Başvurunuz incelendikten sonra e-posta ile bilgilendirileceksiniz. Bu süreç genellikle 1-2 iş günü sürmektedir.</p>
+            <a href="login.php" class="btn btn-primary">Giriş Sayfasına Dön</a>
         </div>
         <?php else: ?>
         <div class="register-card">
             <div class="register-header">
-                <h1>ğŸª Ãœretici BaÅŸvurusu</h1>
-                <p>ButikÃ‡arÅŸÄ±'da Ã¼rÃ¼nlerinizi satmaya baÅŸlayÄ±n</p>
+                <h1>ğŸª Üretici Başvurusu</h1>
+                <p>ButikÇarşı'da ürünlerinizi satmaya başlayın</p>
             </div>
 
             <?php if ($error): ?>
@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="POST">
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Butik / Marka AdÄ± *</label>
+                        <label>Butik / Marka Adı *</label>
                         <input type="text" name="brand_name" required value="<?php echo htmlspecialchars($_POST['brand_name'] ?? ''); ?>">
                     </div>
                     <div class="form-group">
@@ -119,17 +119,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Åifre *</label>
+                        <label>Şifre *</label>
                         <input type="password" name="password" required minlength="6">
                     </div>
                     <div class="form-group">
-                        <label>Åifre Tekrar *</label>
+                        <label>Şifre Tekrar *</label>
                         <input type="password" name="password_confirm" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Instagram @kullanÄ±cÄ±</label>
+                        <label>Instagram @kullanıcı</label>
                         <input type="text" name="instagram_handle" placeholder="@butikadi" value="<?php echo htmlspecialchars($_POST['instagram_handle'] ?? ''); ?>">
                     </div>
                     <div class="form-group">
@@ -138,16 +138,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Åehir</label>
+                    <label>Şehir</label>
                     <input type="text" name="city" value="<?php echo htmlspecialchars($_POST['city'] ?? ''); ?>">
                 </div>
                 <div class="form-group">
-                    <label>Butik TanÄ±tÄ±mÄ±</label>
-                    <textarea name="description" rows="3" placeholder="Ne Ã¼retiyorsunuz? Hangi malzemeleri kullanÄ±yorsunuz?"><?php echo htmlspecialchars($_POST['description'] ?? ''); ?></textarea>
+                    <label>Butik Tanıtımı</label>
+                    <textarea name="description" rows="3" placeholder="Ne üretiyorsunuz? Hangi malzemeleri kullanıyorsunuz?"><?php echo htmlspecialchars($_POST['description'] ?? ''); ?></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">BaÅŸvuru Yap</button>
+                <button type="submit" class="btn btn-primary btn-block" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">Başvuru Yap</button>
                 <p style="text-align:center;margin-top:1rem;">
-                    <a href="login.php" class="link" style="font-size:0.85rem;">Zaten hesabÄ±nÄ±z var mÄ±? GiriÅŸ yapÄ±n</a>
+                    <a href="login.php" class="link" style="font-size:0.85rem;">Zaten hesabınız var mı? Giriş yapın</a>
                 </p>
             </form>
         </div>

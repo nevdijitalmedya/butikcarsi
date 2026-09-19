@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 Auth::requireProducer();
 $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 $producerBrand = $_SESSION['producer_brand'] ?? 'Butik';
@@ -9,7 +9,7 @@ $producerStatus = $_SESSION['producer_status'] ?? 'pending';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $pageTitle ?? 'Dashboard'; ?> â€” Ãœretici Paneli</title>
+    <title><?php echo $pageTitle ?? 'Dashboard'; ?> — Üretici Paneli</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../admin/assets/css/admin.css">
     <style>

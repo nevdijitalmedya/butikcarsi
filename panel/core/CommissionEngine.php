@@ -1,13 +1,13 @@
-﻿<?php
+<?php
 /**
- * CommissionEngine.php â€” Commission calculation and sub-order splitting
+ * CommissionEngine.php — Commission calculation and sub-order splitting
  */
 
 class CommissionEngine {
 
     /**
      * Split cart items into sub-orders by producer and calculate commissions
-     * @param array $cartItems â€” [{product_id, quantity, unit_price, producer_id, ...}]
+     * @param array $cartItems — [{product_id, quantity, unit_price, producer_id, ...}]
      * @return array of sub-order groups
      */
     public static function splitByProducer(array $cartItems): array {
@@ -139,8 +139,8 @@ class CommissionEngine {
                     $basketItems[] = [
                         'id' => 'BI_' . $itemIndex,
                         'name' => mb_substr($item['product_name'], 0, 50),
-                        'category1' => 'El YapÄ±mÄ±',
-                        'category2' => 'Butik ÃœrÃ¼n',
+                        'category1' => 'El Yapımı',
+                        'category2' => 'Butik Ürün',
                         'itemType' => 'PHYSICAL',
                         'price' => $itemPrice,
                         'subMerchantKey' => $group['sub_merchant_key'],

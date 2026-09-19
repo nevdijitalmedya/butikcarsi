@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * IyzicoMarketplace.php â€” iyzico Marketplace API Integration
+ * IyzicoMarketplace.php — iyzico Marketplace API Integration
  * Handles sub-merchant registration, checkout with marketplace split, and approval
  */
 
@@ -67,7 +67,7 @@ class IyzicoMarketplace {
         curl_close($ch);
 
         if ($response === false) {
-            throw new Exception('iyzico sunucusuna baÄŸlanÄ±lamadÄ±.');
+            throw new Exception('iyzico sunucusuna bağlanılamadı.');
         }
 
         return json_decode($response, true) ?: [];
@@ -94,7 +94,7 @@ class IyzicoMarketplace {
         if ($producer['iyzico_sub_merchant_type'] === 'PERSONAL') {
             $nameParts = explode(' ', $producer['owner_name'], 2);
             $payload['contactName'] = $nameParts[0] ?? $producer['owner_name'];
-            $payload['contactSurname'] = $nameParts[1] ?? 'SoyadÄ±';
+            $payload['contactSurname'] = $nameParts[1] ?? 'Soyadı';
         } else {
             $payload['legalCompanyTitle'] = $producer['brand_name'];
             $payload['taxNumber'] = $producer['tax_number'] ?? '';
@@ -111,8 +111,8 @@ class IyzicoMarketplace {
     public static function initCheckout(array $order, array $subOrders, array $basketItems, string $callbackUrl): array {
         $buyer = [
             'id' => 'BY_' . time(),
-            'name' => explode(' ', $order['customer_name'])[0] ?? 'MÃ¼ÅŸteri',
-            'surname' => explode(' ', $order['customer_name'], 2)[1] ?? 'SoyadÄ±',
+            'name' => explode(' ', $order['customer_name'])[0] ?? 'Müşteri',
+            'surname' => explode(' ', $order['customer_name'], 2)[1] ?? 'Soyadı',
             'gsmNumber' => $order['customer_phone'] ?? '+905000000000',
             'email' => $order['customer_email'],
             'identityNumber' => '11111111111',

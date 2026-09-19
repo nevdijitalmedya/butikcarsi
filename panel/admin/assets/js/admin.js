@@ -1,5 +1,5 @@
-﻿/**
- * ButikÃ‡arÅŸÄ± Admin Panel â€” JavaScript
+/**
+ * ButikÇarşı Admin Panel — JavaScript
  */
 document.addEventListener('DOMContentLoaded', () => {
     // Sidebar toggle for mobile
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const slugInput = document.getElementById('slug');
     if (nameInput && slugInput && !slugInput.value) {
         nameInput.addEventListener('input', () => {
-            const tr = {'Ã§':'c','Ã‡':'c','ÄŸ':'g','Ä':'g','Ä±':'i','Ä°':'i','Ã¶':'o','Ã–':'o','ÅŸ':'s','Å':'s','Ã¼':'u','Ãœ':'u'};
+            const tr = {'ç':'c','Ç':'c','ğ':'g','Ğ':'g','ı':'i','İ':'i','ö':'o','Ö':'o','ş':'s','Ş':'s','ü':'u','Ü':'u'};
             let slug = nameInput.value.toLowerCase();
             Object.entries(tr).forEach(([k, v]) => { slug = slug.replace(new RegExp(k, 'g'), v); });
             slug = slug.replace(/[^a-z0-9\s-]/g, '').replace(/[\s-]+/g, '-').replace(/^-|-$/g, '');

@@ -65,7 +65,7 @@ const relatedProducts = PRODUCTS.filter(p => p.producer_slug === product.produce
                             <div style="font-weight: 700; font-size: 0.95rem;">
                                 <a href={`/uretici/${product.producer_slug}`}>{product.producer_name}</a>
                             </div>
-                            <span style="font-size: 0.75rem; color: #64748b;">📍 {product.producer_city} • ⭐ {product.rating}</span>
+                            <span style="font-size: 0.75rem; color: #64748b;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:3px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> {product.producer_city} • ⭐ {product.rating}</span>
                         </div>
                     </div>
                     {producer && (
@@ -76,8 +76,8 @@ const relatedProducts = PRODUCTS.filter(p => p.producer_slug === product.produce
                 </div>
 
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem;">
-                    {product.customizable && <span class="badge badge-custom">✏️ Kişiye Özel Üretim</span>}
-                    {product.free_shipping && <span class="badge badge-free-shipping">📦 Ücretsiz Kargo</span>}
+                    {product.customizable && <span class="badge badge-custom"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Kişiye Özel Üretim</span>}
+                    {product.free_shipping && <span class="badge badge-free-shipping"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Ücretsiz Kargo</span>}
                 </div>
 
                 <h1 style="font-size: 2rem; margin-bottom: 1rem; font-weight: 800; line-height: 1.25;">{product.name}</h1>
@@ -108,7 +108,7 @@ const relatedProducts = PRODUCTS.filter(p => p.producer_slug === product.produce
                 {product.customizable && (
                     <div style="background: #fff8f5; border: 1px solid #fbdcd0; padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.8rem;">
                         <label style="display: block; font-weight: 700; margin-bottom: 0.4rem; color: var(--color-primary);">
-                            ✏️ Kişiselleştirme Notunuz *
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Kişiselleştirme Notunuz *
                         </label>
                         <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 0.8rem;">
                             {product.customization_note || 'Ürün üzerine yazılacak isim, tarih veya fotoğraf detayını buraya yazınız:'}
@@ -139,7 +139,7 @@ const relatedProducts = PRODUCTS.filter(p => p.producer_slug === product.produce
                         class="btn btn-primary" 
                         style="flex: 1; height: 50px; font-size: 1.05rem;"
                     >
-                        🛍️ Sepete Ekle
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Sepete Ekle
                     </button>
                 </div>
 

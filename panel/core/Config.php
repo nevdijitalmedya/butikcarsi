@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * Config.php â€” Environment variable loader (.env) and platform settings accessor
+ * Config.php — Environment variable loader (.env) and platform settings accessor
  */
 
 class Config {
@@ -13,6 +13,9 @@ class Config {
      */
     public static function init(): void {
         $envFile = PANEL_PATH . '/.env';
+        if (!file_exists($envFile) && file_exists(PANEL_PATH . '/.env.example')) {
+            @copy(PANEL_PATH . '/.env.example', $envFile);
+        }
         if (file_exists($envFile)) {
             $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             foreach ($lines as $line) {
@@ -62,12 +65,21 @@ class Config {
      * Update a platform setting
      */
     public static function updateSetting(string $key, string $value): bool {
-        $result = Database::execute(
-            "INSERT INTO platform_settings (setting_key, setting_value) 
-             VALUES (?, ?) 
-             ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value)",
-            [$key, $value]
-        );
+        if (Database::getDriver() === 'sqlite') {
+            $existing = Database::query("SELECT id FROM platform_settings WHERE setting_key = ?", [$key]);
+            if ($existing) {
+                $result = Database::execute("UPDATE platform_settings SET setting_value = ? WHERE setting_key = ?", [$value, $key]);
+            } else {
+                $result = Database::execute("INSERT INTO platform_settings (setting_key, setting_value) VALUES (?, ?)", [$key, $value]);
+            }
+        } else {
+            $result = Database::execute(
+                "INSERT INTO platform_settings (setting_key, setting_value) 
+                 VALUES (?, ?) 
+                 ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value)",
+                [$key, $value]
+            );
+        }
         if ($result) {
             self::$settings[$key] = $value;
         }

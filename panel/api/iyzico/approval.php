@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * Delivery Approval â€” Release escrow payment to producer
+ * Delivery Approval — Release escrow payment to producer
  * POST /api/iyzico/approval.php
  */
 require_once __DIR__ . '/../../config.php';
@@ -20,11 +20,11 @@ if (!$subOrderId) {
 
 $subOrder = Database::query("SELECT * FROM order_sub_orders WHERE id = ?", [$subOrderId]);
 if (!$subOrder) {
-    Response::error('Alt sipariÅŸ bulunamadÄ±.', 404);
+    Response::error('Alt sipariş bulunamadı.', 404);
 }
 
 if ($subOrder['payout_status'] !== 'held') {
-    Response::error('Bu sipariÅŸ zaten onaylanmÄ±ÅŸ veya iptal edilmiÅŸ.', 400);
+    Response::error('Bu sipariş zaten onaylanmış veya iptal edilmiş.', 400);
 }
 
 try {
@@ -56,8 +56,8 @@ try {
         Database::execute("UPDATE orders SET status = 'delivered' WHERE id = ?", [$subOrder['order_id']]);
     }
 
-    Response::success(null, 'Teslimat onaylandÄ±, Ã¶deme serbest bÄ±rakÄ±ldÄ±.');
+    Response::success(null, 'Teslimat onaylandı, ödeme serbest bırakıldı.');
 
 } catch (Exception $e) {
-    Response::error('Onay hatasÄ±: ' . $e->getMessage(), 500);
+    Response::error('Onay hatası: ' . $e->getMessage(), 500);
 }

@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 /**
- * Producers Management â€” ButikÃ‡arÅŸÄ± Admin
+ * Producers Management — ButikÇarşı Admin
  */
 require_once __DIR__ . '/../config.php';
-$pageTitle = 'Ãœreticiler';
+$pageTitle = 'Üreticiler';
 require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/sidebar.php';
 
@@ -83,9 +83,9 @@ foreach ($statusCounts as $sc) {
                 <line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
         </button>
-        <h2 class="page-title">Ãœreticiler</h2>
+        <h2 class="page-title">Üreticiler</h2>
         <div class="topbar-right">
-            <a href="producer-edit.php" class="btn btn-primary">+ Yeni Ãœretici</a>
+            <a href="producer-edit.php" class="btn btn-primary">+ Yeni Üretici</a>
         </div>
     </div>
 
@@ -94,9 +94,9 @@ foreach ($statusCounts as $sc) {
         <div class="filter-bar">
             <div class="filter-tabs">
                 <a href="producers.php" class="filter-tab <?php echo !$statusFilter ? 'active' : ''; ?>">
-                    TÃ¼mÃ¼ <span class="filter-count"><?php echo $total; ?></span>
+                    Tümü <span class="filter-count"><?php echo $total; ?></span>
                 </a>
-                <?php foreach (['pending' => 'Bekleyen', 'approved' => 'OnaylÄ±', 'suspended' => 'AskÄ±da', 'rejected' => 'Reddedilen'] as $key => $label): ?>
+                <?php foreach (['pending' => 'Bekleyen', 'approved' => 'Onaylı', 'suspended' => 'Askıda', 'rejected' => 'Reddedilen'] as $key => $label): ?>
                 <a href="producers.php?status=<?php echo $key; ?>" class="filter-tab <?php echo $statusFilter === $key ? 'active' : ''; ?>">
                     <?php echo $label; ?> <span class="filter-count"><?php echo $statusMap[$key] ?? 0; ?></span>
                 </a>
@@ -104,7 +104,7 @@ foreach ($statusCounts as $sc) {
             </div>
             <form method="GET" class="search-form">
                 <?php if ($statusFilter): ?><input type="hidden" name="status" value="<?php echo htmlspecialchars($statusFilter); ?>"><?php endif; ?>
-                <input type="text" name="q" placeholder="Ãœretici ara..." value="<?php echo htmlspecialchars($search); ?>" class="search-input">
+                <input type="text" name="q" placeholder="Üretici ara..." value="<?php echo htmlspecialchars($search); ?>" class="search-input">
                 <button type="submit" class="btn btn-sm btn-outline">Ara</button>
             </form>
         </div>
@@ -113,20 +113,20 @@ foreach ($statusCounts as $sc) {
         <div class="card">
             <div class="card-body">
                 <?php if (empty($producers)): ?>
-                    <p class="text-muted text-center">Ãœretici bulunamadÄ±.</p>
+                    <p class="text-muted text-center">Üretici bulunamadı.</p>
                 <?php else: ?>
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Ãœretici</th>
+                            <th>Üretici</th>
                             <th>Instagram</th>
-                            <th>Åehir</th>
-                            <th>ÃœrÃ¼n</th>
-                            <th>SipariÅŸ</th>
-                            <th>KazanÃ§</th>
+                            <th>Şehir</th>
+                            <th>Ürün</th>
+                            <th>Sipariş</th>
+                            <th>Kazanç</th>
                             <th>Durum</th>
-                            <th>KayÄ±t</th>
-                            <th>Ä°ÅŸlem</th>
+                            <th>Kayıt</th>
+                            <th>İşlem</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -147,29 +147,29 @@ foreach ($statusCounts as $sc) {
                                 <?php if ($p['instagram_handle']): ?>
                                     <a href="<?php echo htmlspecialchars($p['instagram_url']); ?>" target="_blank" class="link">@<?php echo htmlspecialchars($p['instagram_handle']); ?></a>
                                 <?php else: ?>
-                                    <span class="text-muted">â€”</span>
+                                    <span class="text-muted">—</span>
                                 <?php endif; ?>
                             </td>
-                            <td><?php echo htmlspecialchars($p['city'] ?? 'â€”'); ?></td>
+                            <td><?php echo htmlspecialchars($p['city'] ?? '—'); ?></td>
                             <td class="text-center"><?php echo $p['product_count']; ?></td>
                             <td class="text-center"><?php echo $p['order_count']; ?></td>
-                            <td class="text-bold">â‚º<?php echo number_format($p['total_earned'], 2, ',', '.'); ?></td>
+                            <td class="text-bold">₺<?php echo number_format($p['total_earned'], 2, ',', '.'); ?></td>
                             <td><span class="badge badge--<?php echo $p['status']; ?>"><?php echo ucfirst($p['status']); ?></span></td>
                             <td class="text-muted text-sm"><?php echo date('d.m.Y', strtotime($p['created_at'])); ?></td>
                             <td>
                                 <div class="action-group">
-                                    <a href="producer-edit.php?id=<?php echo $p['id']; ?>" class="btn btn-xs btn-outline" title="DÃ¼zenle">âœï¸</a>
+                                    <a href="producer-edit.php?id=<?php echo $p['id']; ?>" class="btn btn-xs btn-outline" title="Düzenle">Düzenle</a>
                                     <?php if ($p['status'] === 'pending'): ?>
                                         <form method="POST" style="display:inline;">
                                             <input type="hidden" name="id" value="<?php echo $p['id']; ?>">
                                             <input type="hidden" name="action" value="approve">
-                                            <button type="submit" class="btn btn-xs btn-success" title="Onayla">âœ“</button>
+                                            <button type="submit" class="btn btn-xs btn-success" title="Onayla">Onayla</button>
                                         </form>
                                     <?php endif; ?>
                                     <form method="POST" style="display:inline;">
                                         <input type="hidden" name="id" value="<?php echo $p['id']; ?>">
                                         <input type="hidden" name="action" value="feature">
-                                        <button type="submit" class="btn btn-xs <?php echo $p['is_featured'] ? 'btn-amber' : 'btn-outline'; ?>" title="Ã–ne Ã‡Ä±kar">â­</button>
+                                        <button type="submit" class="btn btn-xs <?php echo $p['is_featured'] ? 'btn-amber' : 'btn-outline'; ?>" title="Öne Çıkar">Öne Çıkar</button>
                                     </form>
                                 </div>
                             </td>

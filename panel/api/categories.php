@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Public API: Categories
  */

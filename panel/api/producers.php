@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 /**
  * Public API: Producers
- * GET /api/producers.php              â€” List approved producers
- * GET /api/producers.php?slug=xxx     â€” Single producer by slug
- * GET /api/producers.php?featured=1   â€” Featured producers only
+ * GET /api/producers.php              — List approved producers
+ * GET /api/producers.php?slug=xxx     — Single producer by slug
+ * GET /api/producers.php?featured=1   — Featured producers only
  */
 require_once __DIR__ . '/../config.php';
 Response::handleOptions();
@@ -25,7 +25,7 @@ if ($slug) {
     ", [$slug]);
 
     if (!$producer) {
-        Response::error('Ãœretici bulunamadÄ±.', 404);
+        Response::error('Üretici bulunamadı.', 404);
     }
 
     // Get producer products

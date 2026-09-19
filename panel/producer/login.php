@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * Producer Login â€” ButikÃ‡arÅŸÄ±
+ * Producer Login — ButikÇarşı
  */
 require_once __DIR__ . '/../config.php';
 
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: index.php');
         exit;
     } else {
-        $error = 'GeÃ§ersiz e-posta veya ÅŸifre.';
+        $error = 'Geçersiz e-posta veya şifre.';
     }
 }
 ?>
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ãœretici GiriÅŸi â€” ButikÃ‡arÅŸÄ±</title>
+    <title>Üretici Girişi — ButikÇarşı</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../admin/assets/css/admin.css">
 </head>
@@ -36,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <polyline points="9 22 9 12 15 12 15 22"></polyline>
                     </svg>
                 </div>
-                <h1>Ãœretici Paneli</h1>
-                <p>ÃœrÃ¼nlerinizi yÃ¶netin, sipariÅŸlerinizi takip edin</p>
+                <h1>Üretici Paneli</h1>
+                <p>Ürünlerinizi yönetin, siparişlerinizi takip edin</p>
             </div>
 
             <?php if ($error): ?>
@@ -50,14 +50,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="email" id="email" name="email" required autofocus placeholder="uretici@email.com" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
                 </div>
                 <div class="form-group">
-                    <label for="password">Åifre</label>
-                    <input type="password" id="password" name="password" required placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢">
+                    <label for="password">Şifre</label>
+                    <input type="password" id="password" name="password" required placeholder="••••••••">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">GiriÅŸ Yap</button>
+                <button type="submit" class="btn btn-primary btn-block" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">Giriş Yap</button>
             </form>
 
             <p style="text-align:center;margin-top:1.5rem;">
-                <a href="register.php" class="link" style="font-size:0.85rem;">HenÃ¼z hesabÄ±nÄ±z yok mu? BaÅŸvuru yapÄ±n â†’</a>
+                <a href="register.php" class="link" style="font-size:0.85rem;">Henüz hesabınız yok mu? Başvuru yapın →</a>
             </p>
         </div>
     </div>

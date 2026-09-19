@@ -1,15 +1,15 @@
-﻿<?php
+<?php
 /**
  * Admin Sidebar Navigation
  */
 $menuItems = [
     ['page' => 'index',       'icon' => 'dashboard',  'label' => 'Dashboard'],
-    ['page' => 'producers',   'icon' => 'store',      'label' => 'Ãœreticiler',   'badge' => $pendingProducers > 0 ? $pendingProducers : null],
-    ['page' => 'products',    'icon' => 'package',     'label' => 'ÃœrÃ¼nler',      'badge' => $pendingProducts > 0 ? $pendingProducts : null],
-    ['page' => 'orders',      'icon' => 'shopping-cart','label' => 'SipariÅŸler',  'badge' => $newOrders > 0 ? $newOrders : null],
+    ['page' => 'producers',   'icon' => 'store',      'label' => 'Üreticiler',   'badge' => $pendingProducers > 0 ? $pendingProducers : null],
+    ['page' => 'products',    'icon' => 'package',     'label' => 'Ürünler',      'badge' => $pendingProducts > 0 ? $pendingProducts : null],
+    ['page' => 'orders',      'icon' => 'shopping-cart','label' => 'Siparişler',  'badge' => $newOrders > 0 ? $newOrders : null],
     ['page' => 'categories',  'icon' => 'grid',        'label' => 'Kategoriler'],
     ['page' => 'commissions', 'icon' => 'percent',     'label' => 'Komisyonlar'],
-    ['page' => 'payouts',     'icon' => 'credit-card', 'label' => 'Ã–demeler'],
+    ['page' => 'payouts',     'icon' => 'credit-card', 'label' => 'Ödemeler'],
     ['page' => 'banners',     'icon' => 'image',       'label' => 'Bannerlar'],
     ['page' => 'messages',    'icon' => 'mail',        'label' => 'Mesajlar'],
     ['page' => 'settings',    'icon' => 'settings',    'label' => 'Ayarlar'],
@@ -23,7 +23,7 @@ $menuItems = [
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <path d="M16 10a4 4 0 0 1-8 0"></path>
             </svg>
-            <span>ButikÃ‡arÅŸÄ±</span>
+            <span>ButikÇarşı</span>
         </div>
     </div>
 
@@ -48,7 +48,7 @@ $menuItems = [
                 <span class="sidebar-user-role"><?php echo ucfirst($_SESSION['admin_role'] ?? 'admin'); ?></span>
             </div>
         </div>
-        <a href="logout.php" class="sidebar-logout" title="Ã‡Ä±kÄ±ÅŸ Yap">
+        <a href="logout.php" class="sidebar-logout" title="Çıkış Yap">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                 <polyline points="16 17 21 12 16 7"></polyline>

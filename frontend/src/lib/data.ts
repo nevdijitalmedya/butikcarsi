@@ -73,7 +73,7 @@ export const CATEGORIES: Category[] = [
         name: 'Kişiye Özel Hediyelik',
         slug: 'kisiye-ozel-hediyelik',
         description: 'İsim, tarih ve fotoğraf baskılı unutulmaz hediyeler',
-        icon: '🎁',
+        icon: 'gift',
         image_url: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=600&auto=format&fit=crop&q=80'
     },
     {
@@ -81,7 +81,7 @@ export const CATEGORIES: Category[] = [
         name: 'Lazer Kesim & Baskı',
         slug: 'lazer-kesim-baski',
         description: 'Çelik kolye, künye, Zippo çakmak ve ahşap lazer kazıma',
-        icon: '⚡',
+        icon: 'laser',
         image_url: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&auto=format&fit=crop&q=80'
     },
     {
@@ -89,7 +89,7 @@ export const CATEGORIES: Category[] = [
         name: 'Epoksi & Reçine Sanatı',
         slug: 'epoksi-recine-sanati',
         description: 'Deniz dalgalı sunumluk, sehpa ve el yapımı reçine objeler',
-        icon: '🌊',
+        icon: 'resin',
         image_url: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=600&auto=format&fit=crop&q=80'
     },
     {
@@ -97,7 +97,7 @@ export const CATEGORIES: Category[] = [
         name: 'El Örgüsü & Makrome',
         slug: 'el-orgusu-makrome',
         description: 'El emeği kağıt ip çantalar, hırkalar ve duvar dekorasyonu',
-        icon: '🧶',
+        icon: 'macrame',
         image_url: 'https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=600&auto=format&fit=crop&q=80'
     },
     {
@@ -105,7 +105,7 @@ export const CATEGORIES: Category[] = [
         name: 'Hakiki Deri Tasarımlar',
         slug: 'hakiki-deri-tasarimlar',
         description: 'El dikişi deri cüzdan, kartlık, kemer ve aksesuarlar',
-        icon: '💼',
+        icon: 'leather',
         image_url: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&auto=format&fit=crop&q=80'
     },
     {
@@ -113,7 +113,7 @@ export const CATEGORIES: Category[] = [
         name: 'Seramik & Çömlek',
         slug: 'seramik-comlek',
         description: 'Elde şekillendirilmiş el boyaması kupa, vazo ve tütsülük',
-        icon: '☕',
+        icon: 'ceramic',
         image_url: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80'
     }
 ];

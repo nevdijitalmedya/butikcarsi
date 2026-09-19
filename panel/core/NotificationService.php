@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * NotificationService.php â€” Email + WhatsApp notification system
+ * NotificationService.php — Email + WhatsApp notification system
  */
 
 class NotificationService {
@@ -23,37 +23,37 @@ class NotificationService {
         $items = Database::queryAll("SELECT * FROM order_items WHERE sub_order_id = ?", [$subOrderId]);
         $itemsList = '';
         foreach ($items as $item) {
-            $itemsList .= "- {$item['product_name']} x{$item['quantity']} (â‚º" . number_format($item['total_price'], 2, ',', '.') . ")\n";
+            $itemsList .= "- {$item['product_name']} x{$item['quantity']} (₺" . number_format($item['total_price'], 2, ',', '.') . ")\n";
         }
 
         // Email notification
         if ($subOrder['notify_email']) {
-            $subject = "ğŸ›’ Yeni SipariÅŸ #{$subOrder['sub_order_number']} â€” ButikÃ‡arÅŸÄ±";
+            $subject = "ğŸ›’ Yeni Sipariş #{$subOrder['sub_order_number']} — ButikÇarşı";
             $body = "Merhaba {$subOrder['brand_name']},\n\n"
-                  . "Yeni bir sipariÅŸ aldÄ±nÄ±z!\n\n"
-                  . "SipariÅŸ No: {$subOrder['sub_order_number']}\n"
-                  . "MÃ¼ÅŸteri: {$subOrder['customer_name']}\n"
-                  . "Åehir: {$subOrder['shipping_city']}\n\n"
-                  . "ÃœrÃ¼nler:\n{$itemsList}\n"
-                  . "Toplam: â‚º" . number_format($subOrder['subtotal'], 2, ',', '.') . "\n"
-                  . "Komisyon (%10): â‚º" . number_format($subOrder['commission_amount'], 2, ',', '.') . "\n"
-                  . "Net KazanÃ§: â‚º" . number_format($subOrder['producer_earning'], 2, ',', '.') . "\n\n"
-                  . "LÃ¼tfen sipariÅŸi en kÄ±sa sÃ¼rede hazÄ±rlayÄ±p kargoya verin.\n"
+                  . "Yeni bir sipariş aldınız!\n\n"
+                  . "Sipariş No: {$subOrder['sub_order_number']}\n"
+                  . "Müşteri: {$subOrder['customer_name']}\n"
+                  . "Şehir: {$subOrder['shipping_city']}\n\n"
+                  . "Ürünler:\n{$itemsList}\n"
+                  . "Toplam: ₺" . number_format($subOrder['subtotal'], 2, ',', '.') . "\n"
+                  . "Komisyon (%10): ₺" . number_format($subOrder['commission_amount'], 2, ',', '.') . "\n"
+                  . "Net Kazanç: ₺" . number_format($subOrder['producer_earning'], 2, ',', '.') . "\n\n"
+                  . "Lütfen siparişi en kısa sürede hazırlayıp kargoya verin.\n"
                   . "Panel: " . self::getSiteUrl() . "/panel/producer/orders.php\n\n"
-                  . "ButikÃ‡arÅŸÄ± Ekibi";
+                  . "ButikÇarşı Ekibi";
 
             self::sendEmail($subOrder['producer_email'], $subject, $body, 'order', $subOrderId);
         }
 
         // WhatsApp notification (deep link)
         if ($subOrder['notify_whatsapp'] && !empty($subOrder['whatsapp_number'])) {
-            $waMessage = "ğŸ›’ *Yeni SipariÅŸ!*\n\n"
-                       . "SipariÅŸ: {$subOrder['sub_order_number']}\n"
-                       . "MÃ¼ÅŸteri: {$subOrder['customer_name']}\n"
-                       . "Tutar: â‚º" . number_format($subOrder['subtotal'], 2, ',', '.') . "\n\n"
-                       . "Detaylar iÃ§in panele girin.";
+            $waMessage = "ğŸ›’ *Yeni Sipariş!*\n\n"
+                       . "Sipariş: {$subOrder['sub_order_number']}\n"
+                       . "Müşteri: {$subOrder['customer_name']}\n"
+                       . "Tutar: ₺" . number_format($subOrder['subtotal'], 2, ',', '.') . "\n\n"
+                       . "Detaylar için panele girin.";
 
-            self::logNotification('whatsapp', $subOrder['whatsapp_number'], 'Yeni SipariÅŸ', $waMessage, 'order', $subOrderId);
+            self::logNotification('whatsapp', $subOrder['whatsapp_number'], 'Yeni Sipariş', $waMessage, 'order', $subOrderId);
         }
 
         // Update notification timestamp
@@ -77,13 +77,13 @@ class NotificationService {
 
         if (!$subOrder) return false;
 
-        $subject = "ğŸ“¦ SipariÅŸiniz Kargoya Verildi â€” #{$subOrder['sub_order_number']}";
+        $subject = "ğŸ“¦ Siparişiniz Kargoya Verildi — #{$subOrder['sub_order_number']}";
         $body = "Merhaba {$subOrder['customer_name']},\n\n"
-              . "{$subOrder['brand_name']} tarafÄ±ndan hazÄ±rlanan sipariÅŸiniz kargoya verildi!\n\n"
-              . "Kargo FirmasÄ±: {$subOrder['shipping_provider']}\n"
+              . "{$subOrder['brand_name']} tarafından hazırlanan siparişiniz kargoya verildi!\n\n"
+              . "Kargo Firması: {$subOrder['shipping_provider']}\n"
               . "Takip No: {$subOrder['tracking_number']}\n\n"
-              . "SipariÅŸiniz tahminen 2-5 iÅŸ gÃ¼nÃ¼ iÃ§inde elinize ulaÅŸacaktÄ±r.\n\n"
-              . "ButikÃ‡arÅŸÄ± Ekibi";
+              . "Siparişiniz tahminen 2-5 iş günü içinde elinize ulaşacaktır.\n\n"
+              . "ButikÇarşı Ekibi";
 
         self::sendEmail($subOrder['customer_email'], $subject, $body, 'shipment', $subOrderId);
 
@@ -99,12 +99,12 @@ class NotificationService {
         $producer = Database::query("SELECT * FROM producers WHERE id = ?", [$producerId]);
         if (!$producer) return false;
 
-        $subject = "ğŸ’° Ã–demeniz AktarÄ±ldÄ± â€” ButikÃ‡arÅŸÄ±";
+        $subject = "ğŸ’° Ödemeniz Aktarıldı — ButikÇarşı";
         $body = "Merhaba {$producer['brand_name']},\n\n"
-              . "â‚º" . number_format($amount, 2, ',', '.') . " tutarÄ±ndaki Ã¶demeniz IBAN hesabÄ±nÄ±za aktarÄ±ldÄ±.\n\n"
+              . "₺" . number_format($amount, 2, ',', '.') . " tutarındaki ödemeniz IBAN hesabınıza aktarıldı.\n\n"
               . "IBAN: {$iban}\n\n"
-              . "KazanÃ§larÄ±nÄ±zÄ± panelden takip edebilirsiniz.\n\n"
-              . "ButikÃ‡arÅŸÄ± Ekibi";
+              . "Kazançlarınızı panelden takip edebilirsiniz.\n\n"
+              . "ButikÇarşı Ekibi";
 
         return self::sendEmail($producer['email'], $subject, $body, 'payout', $producerId);
     }
@@ -114,7 +114,7 @@ class NotificationService {
      */
     private static function sendEmail(string $to, string $subject, string $body, string $relatedType = '', int $relatedId = 0): bool {
         $smtpHost = Config::setting('smtp_host', '');
-        $fromName = Config::setting('smtp_from_name', 'ButikÃ‡arÅŸÄ±');
+        $fromName = Config::setting('smtp_from_name', 'ButikÇarşı');
         $fromEmail = Config::setting('smtp_from_email', 'noreply@butikcarsi.com');
 
         $success = false;
