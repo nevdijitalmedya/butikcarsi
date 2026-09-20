@@ -70,14 +70,9 @@
 
 html, body {
     overflow-x: clip;
-    min-height: 100%;
-    background-color: var(--color-paper);
-    color: var(--color-ink);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 /* Typography Discipline (Hallmark: headers always roman, never italic) */
@@ -424,4 +419,183 @@ img {
     color: #94a3b8;
     flex-wrap: wrap;
     gap: 1rem;
+}
+
+
+/* Hallmark Mobile Bottom App Bar */
+.mobile-bottom-nav {
+    display: none;
+}
+
+@media (max-width: 640px) {
+    body {
+        padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+    }
+    .mobile-bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: calc(58px + env(safe-area-inset-bottom, 0px));
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--color-border);
+        z-index: 1000;
+        align-items: center;
+        justify-content: space-around;
+        box-shadow: 0 -4px 16px rgba(24, 32, 47, 0.05);
+    }
+    .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        color: var(--color-ink-muted);
+        text-decoration: none;
+        font-size: 0.7rem;
+        font-weight: 600;
+        min-width: 48px;
+        height: 100%;
+        transition: color var(--duration-fast) var(--ease-tactile);
+    }
+    .mobile-nav-item:hover, .mobile-nav-item.active {
+        color: var(--color-primary);
+    }
+    .mobile-nav-highlight {
+        color: var(--color-primary);
+    }
+    .mobile-highlight-icon {
+        background: var(--color-primary);
+        color: #ffffff;
+        width: 32px;
+        height: 32px;
+        border-radius: var(--radius-full);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(200, 88, 52, 0.35);
+        margin-top: -6px;
+    }
+}
+
+/* Responsive Grids & Sections (Hallmark Gate 50 & 52) */
+.hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+}
+@media (min-width: 860px) {
+    .hero-grid {
+        grid-template-columns: 1.2fr 1fr;
+        gap: 3.5rem;
+    }
+}
+
+.checkout-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+}
+@media (min-width: 860px) {
+    .checkout-grid {
+        grid-template-columns: 1.5fr 1fr;
+        gap: 3rem;
+    }
+}
+
+.cart-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+}
+@media (min-width: 860px) {
+    .cart-grid {
+        grid-template-columns: 1.8fr 1fr;
+        gap: 2.5rem;
+    }
+}
+
+.product-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+}
+@media (min-width: 860px) {
+    .product-detail-grid {
+        grid-template-columns: 1.1fr 1fr;
+        gap: 3.5rem;
+    }
+}
+
+.form-row-responsive {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+}
+@media (min-width: 600px) {
+    .form-row-responsive {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+}
+
+.value-props-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    text-align: center;
+}
+@media (min-width: 640px) {
+    .value-props-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem;
+    }
+}
+
+/* Responsive Header Enhancements (320px - 768px) */
+@media (max-width: 768px) {
+    .header-main {
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        padding: 0.65rem 0;
+    }
+    .logo-wrap {
+        order: 1;
+    }
+    .header-actions {
+        order: 2;
+        gap: 0.4rem;
+    }
+    .search-bar {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 0.2rem;
+    }
+    .search-bar input {
+        min-height: 44px; /* Touch target */
+        font-size: 15px;
+    }
+    .header-actions .btn {
+        min-height: 38px;
+        padding: 0.35rem 0.7rem;
+        font-size: 0.82rem;
+    }
+    .d-none-mobile {
+        display: none !important;
+    }
+    .nav-pills {
+        padding: 0.5rem 0;
+        -webkit-mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+        mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+    }
 }

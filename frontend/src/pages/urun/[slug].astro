@@ -28,7 +28,7 @@ const relatedProducts = PRODUCTS.filter(p => p.producer_slug === product.produce
             <span style="color: var(--color-dark); font-weight: 600;">{product.name}</span>
         </nav>
 
-        <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 3.5rem; align-items: start;">
+        <div class="product-detail-grid">
             <!-- PRODUCT GALLERY -->
             <div>
                 <div class="card" style="border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 1rem;">
@@ -145,7 +145,7 @@ const relatedProducts = PRODUCTS.filter(p => p.producer_slug === product.produce
 
                 <!-- SPECS TABLE -->
                 <div class="card" style="padding: 1.2rem;">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.88rem;">
+                    <div class="form-row-responsive" style="font-size: 0.88rem;">
                         <div><strong>Malzeme:</strong> {product.material}</div>
                         <div><strong>Hazırlanma Süresi:</strong> {product.production_time}</div>
                         <div><strong>Kargo:</strong> {product.free_shipping ? 'Ücretsiz Kargo' : `₺${product.shipping_cost}`}</div>

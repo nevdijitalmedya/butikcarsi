@@ -7,7 +7,8 @@ import { CATEGORIES } from '../lib/data';
         <div class="container d-flex justify-content-between align-items-center">
             <span style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8a65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                %100 Güvenli Alışveriş • Escrow (Emanet) Korumalı Ödeme • Kişiye Özel Butik Üretim
+                <span class="d-none-mobile">%100 Güvenli Alışveriş • Escrow (Emanet) Korumalı Ödeme • Kişiye Özel Butik Üretim</span>
+     <span class="d-block-mobile" style="display:none; font-size:0.75rem;">%100 Güvenli Butik Alışveriş • Escrow Koruması</span>
             </span>
         </div>
     </div>
@@ -134,3 +135,15 @@ import { CATEGORIES } from '../lib/data';
         </nav>
     </div>
 </header>
+
+<style>
+@media (max-width: 640px) {
+    .d-block-mobile {
+        display: inline-block !important;
+    }
+    .header-top {
+        padding: 0.3rem 0;
+        font-size: 0.72rem;
+    }
+}
+</style>

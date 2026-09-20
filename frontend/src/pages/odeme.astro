@@ -6,12 +6,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="container" style="padding: 3rem 1.5rem;">
         <h1 style="font-size: 2.2rem; margin-bottom: 2rem;">Güvenli Ödeme & Teslimat</h1>
 
-        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: start;">
+        <div class="checkout-grid">
             <div>
                 <div class="card" style="padding: 2rem; margin-bottom: 2rem;">
                     <h3 style="font-size: 1.25rem; margin-bottom: 1.2rem;">1. Teslimat Adresi Bilgileri</h3>
                     <form id="checkout-form" onsubmit="event.preventDefault(); submitOrder();">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="form-row-responsive">
                             <div>
                                 <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">Adınız Soyadınız *</label>
                                 <input type="text" id="cust-name" required placeholder="Canan Özdemir" style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
@@ -27,7 +27,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                             <input type="email" id="cust-email" required placeholder="ornek@mail.com" style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
                         </div>
 
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="form-row-responsive">
                             <div>
                                 <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">İl *</label>
                                 <input type="text" id="cust-city" required placeholder="İstanbul" style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
