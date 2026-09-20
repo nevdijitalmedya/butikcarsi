@@ -28,7 +28,7 @@ class NotificationService {
 
         // Email notification
         if ($subOrder['notify_email']) {
-            $subject = "ğŸ›’ Yeni Sipariş #{$subOrder['sub_order_number']} — ButikÇarşı";
+            $subject = "Yeni Sipariş #{$subOrder['sub_order_number']} — ButikÇarşı";
             $body = "Merhaba {$subOrder['brand_name']},\n\n"
                   . "Yeni bir sipariş aldınız!\n\n"
                   . "Sipariş No: {$subOrder['sub_order_number']}\n"
@@ -47,7 +47,7 @@ class NotificationService {
 
         // WhatsApp notification (deep link)
         if ($subOrder['notify_whatsapp'] && !empty($subOrder['whatsapp_number'])) {
-            $waMessage = "ğŸ›’ *Yeni Sipariş!*\n\n"
+            $waMessage = "*Yeni Sipariş!*\n\n"
                        . "Sipariş: {$subOrder['sub_order_number']}\n"
                        . "Müşteri: {$subOrder['customer_name']}\n"
                        . "Tutar: ₺" . number_format($subOrder['subtotal'], 2, ',', '.') . "\n\n"
@@ -77,7 +77,7 @@ class NotificationService {
 
         if (!$subOrder) return false;
 
-        $subject = "ğŸ“¦ Siparişiniz Kargoya Verildi — #{$subOrder['sub_order_number']}";
+        $subject = "Siparişiniz Kargoya Verildi — #{$subOrder['sub_order_number']}";
         $body = "Merhaba {$subOrder['customer_name']},\n\n"
               . "{$subOrder['brand_name']} tarafından hazırlanan siparişiniz kargoya verildi!\n\n"
               . "Kargo Firması: {$subOrder['shipping_provider']}\n"
@@ -99,7 +99,7 @@ class NotificationService {
         $producer = Database::query("SELECT * FROM producers WHERE id = ?", [$producerId]);
         if (!$producer) return false;
 
-        $subject = "ğŸ’° Ödemeniz Aktarıldı — ButikÇarşı";
+        $subject = "Ödemeniz Aktarıldı — ButikÇarşı";
         $body = "Merhaba {$producer['brand_name']},\n\n"
               . "₺" . number_format($amount, 2, ',', '.') . " tutarındaki ödemeniz IBAN hesabınıza aktarıldı.\n\n"
               . "IBAN: {$iban}\n\n"

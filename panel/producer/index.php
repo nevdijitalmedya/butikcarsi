@@ -32,7 +32,7 @@ $recentOrders = Database::queryAll("
                 <line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
         </button>
-        <h2 class="page-title">Hoş Geldiniz, <?php echo htmlspecialchars($producerBrand); ?> ğŸ‘‹</h2>
+        <h2 class="page-title">Hoş Geldiniz, <?php echo htmlspecialchars($producerBrand); ?> </h2>
     </div>
 
     <div class="admin-content">

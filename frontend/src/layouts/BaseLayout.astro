@@ -20,7 +20,7 @@ const {
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>{title} — ButikÇarşı</title>
     <meta name="description" content={description}>
     
@@ -41,6 +41,52 @@ const {
     <slot />
     <Footer />
 
+    <!-- Hallmark Mobile Bottom Navigation (< 640px) -->
+    <nav class="mobile-bottom-nav" aria-label="Mobil Hızlı Menü">
+        <a href="/" class="mobile-nav-item" title="Vitrin">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <span>Vitrin</span>
+        </a>
+        <a href="/kesfet" class="mobile-nav-item" title="Keşfet">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+            </svg>
+            <span>Keşfet</span>
+        </a>
+        <a href="/uretici-ol" class="mobile-nav-item mobile-nav-highlight" title="Üretici Ol">
+            <div class="mobile-highlight-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>
+                </svg>
+            </div>
+            <span>Üretici Ol</span>
+        </a>
+        <a href="/sepet" class="mobile-nav-item" title="Sepet">
+            <div style="position: relative; display: inline-flex;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+                    <path d="M3 6h18"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+                <span id="mobile-cart-badge" style="display: none; position: absolute; top: -5px; right: -7px; background: #c85834; color: #fff; border-radius: 999px; width: 16px; height: 16px; font-size: 0.65rem; align-items: center; justify-content: center; font-weight: bold;">0</span>
+            </div>
+            <span>Sepet</span>
+        </a>
+        <a href="/panel/producer/login.php" class="mobile-nav-item" title="Atölye">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m2 7 4.4-4.4A2 2 0 0 1 7.8 2h8.4a2 2 0 0 1 1.4.6L22 7"/>
+                <path d="M22 7v13a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7"/>
+                <path d="M12 11a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
+            </svg>
+            <span>Atölye</span>
+        </a>
+    </nav>
+
+
     <script is:inline>
         // Simple client cart indicator
         function updateCartBadge() {
@@ -51,6 +97,11 @@ const {
                 if (badge) {
                     badge.textContent = totalCount;
                     badge.style.display = totalCount > 0 ? 'flex' : 'none';
+                }
+                const mobileBadge = document.getElementById('mobile-cart-badge');
+                if (mobileBadge) {
+                    mobileBadge.textContent = totalCount;
+                    mobileBadge.style.display = totalCount > 0 ? 'flex' : 'none';
                 }
             } catch(e) {}
         }
